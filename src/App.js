@@ -1,11 +1,21 @@
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import "./App.scss";
 
-
+import { Header, Footer } from "./components/index";
+import { HomePage, ContactPage, CardPage, AdminPage, OrderPage } from "./pages";
 
 function App() {
   return (
-    <div >
-     TEST2
-    </div>
+    <>
+      <BrowserRouter>
+        <Header />
+        <Routes>
+          <Route path="/" element={<HomePage />} />
+          <Route path="/contact" element={<ContactPage />} />
+        </Routes>
+        <Footer />
+      </BrowserRouter>
+    </>
   );
 }
 
