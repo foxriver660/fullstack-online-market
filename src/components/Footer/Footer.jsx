@@ -1,11 +1,14 @@
-import React from 'react'
-import classes from './Footer.module.scss'
+import React from "react";
+import classes from "./Footer.module.scss";
 const Footer = () => {
-  return (
-    <div>
-      <h1>FOOTER</h1>
-    </div>
-  )
-}
+  const date = new Date();
+  const year = date.getFullYear();
 
-export default Footer
+  return (
+    <footer className={classes.footer}>
+      <p className={classes.text}>&copy; {year} Safonov Ivan .</p>
+    </footer>
+  );
+};
+
+export default Footer;
