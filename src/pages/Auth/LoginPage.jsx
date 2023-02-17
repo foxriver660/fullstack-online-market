@@ -3,7 +3,7 @@ import classes from "./Auth.module.scss";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import {Card} from '../../components/index'
-import loginImg from "../../images/man-hold-registration-clipboard-checklist-man-hold-hand-clipboard-agreement-flat-design-vector-illustration-background-112434342.jpg";
+import loginImg from "../../images/kisspng-offer-and-acceptance-contract-of-sale-proposal-zak-inventory-management-software-5b1e5574946513.3219275815287146126079.jpg";
 const LoginPage = () => {
   return (
     <section className={`container ${classes.auth}`}>

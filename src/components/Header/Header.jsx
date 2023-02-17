@@ -18,7 +18,7 @@ const logo = (
 const cart = (
   <span className={classes.cart}>
     <Link className={classes.cartLink} to="/cart">
-      Корзина <BsCart4 sixe={20} />
+      Корзина <BsCart4 size={20} />
       <p>0</p>
     </Link>
   </span>
