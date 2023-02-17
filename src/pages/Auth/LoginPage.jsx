@@ -19,9 +19,9 @@ const LoginPage = () => {
           <button className="--btn --btn-primary --btn-block" type="submit">
             Войти
           </button>
-          <div className={classes.links}>
-            <Link to="/reset">Восстановить пароль</Link>
-          </div>
+          <span className={classes.register}>
+            Забыли пароль?<Link to="/reset">Восстановить пароль</Link>
+          </span>
         </form>
         <button className="--btn --btn-google --btn-block" type="submit">
           <FcGoogle /> Login with Google

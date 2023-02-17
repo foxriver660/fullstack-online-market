@@ -1,9 +1,9 @@
 import React from "react";
 import classes from "./Auth.module.scss";
 import { Link } from "react-router-dom";
-import { FcGoogle } from "react-icons/fc";
 import { Card } from "../../components/index";
 import registerImg from "../../images/man-hold-registration-clipboard-checklist-man-hold-hand-clipboard-agreement-flat-design-vector-illustration-background-112434342.jpg";
+
 const RegisterPage = () => {
   return (
     <section className={`container ${classes.auth}`}>
@@ -18,9 +18,8 @@ const RegisterPage = () => {
             <button className="--btn --btn-primary --btn-block" type="submit">
               Зарегистрироваться
             </button>
-            
           </form>
-          
+
           <span className={classes.register}>
             Уже есть аккаунт?<Link to="/login"> Войти</Link>
           </span>
