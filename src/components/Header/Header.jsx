@@ -1,6 +1,6 @@
 import React from "react";
 import classes from "./Header.module.scss";
-import { Link } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import {VscChromeClose} from "react-icons/vsc";
@@ -23,6 +23,7 @@ const cart = (
     </Link>
   </span>
 );
+const activeLink = ({isActive})=>isActive ? classes.active : classes.navLink
 const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => {
@@ -51,15 +52,15 @@ const Header = () => {
           <ul onClick={hideMenu} className={classes.navList}>
             <li className={`${classes.navItem} ${classes.logoMobile}`}>{logo} <VscChromeClose onClick={hideMenu} size={30}/></li>
             <li className={classes.navItem}>
-              <Link className={classes.navLink} to="/">
+              <NavLink className={activeLink} to="/">
                 Главная страница
-              </Link>
+              </NavLink>
             </li>
 
             <li className={classes.navItem}>
-              <Link className={classes.navLink} to="/contact">
+              <NavLink className={activeLink} to="/contact">
                 Контакты
-              </Link>
+              </NavLink>
             </li>
           </ul>
           <div className={classes.rigthNavBar} onClick={hideMenu}>
