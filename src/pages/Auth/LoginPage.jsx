@@ -2,7 +2,7 @@ import React from "react";
 import classes from "./Auth.module.scss";
 import { Link } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
-
+import {Card} from '../../components/index'
 import loginImg from "../../images/man-hold-registration-clipboard-checklist-man-hold-hand-clipboard-agreement-flat-design-vector-illustration-background-112434342.jpg";
 const LoginPage = () => {
   return (
@@ -10,8 +10,9 @@ const LoginPage = () => {
       <div className={classes.img}>
         <img src={loginImg} alt="login" width="200px" />
       </div>
+      <Card>
       <div className={classes.form}>
-       
+       <h2 className={classes.title}>Войти в личный кабинет</h2>
         <form>
           <input type="text" placeholder="Email" required />
           <input type="password" placeholder="Password" required />
@@ -31,6 +32,7 @@ const LoginPage = () => {
         </span>
         
       </div>
+      </Card>
     </section>
   );
 };
