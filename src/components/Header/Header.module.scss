@@ -2,7 +2,7 @@
   width: 100%;
   background-color: var(--dark-blue);
   color: var(--color-white);
-  outline: 1px solid red;
+
   .mainWrapper {
     width: 100%;
     height: 8rem;
@@ -13,11 +13,9 @@
     justify-content: space-between;
     align-items: center;
     position: relative;
-    outline: 1px solid red;
   }
 
   .logo .logoLink .logoTitle {
-    outline: 1px solid red;
     display: flex;
     font-size: 5rem;
     width: 25%;
@@ -29,12 +27,10 @@
   }
 
   .nav {
-    outline: 1px solid red;
     width: 75%;
     display: flex;
     justify-content: space-between;
     .navList {
-      outline: 1px solid rgb(22, 255, 1);
       display: flex;
       justify-content: space-between;
       list-style: none;
@@ -56,7 +52,6 @@
   }
 
   .rigthNavBar {
-    outline: 2px solid rgb(0, 183, 255);
     display: flex;
 
     .cart .cartLink {
@@ -78,7 +73,6 @@
     }
 
     span {
-      outline: 5px solid rgb(0, 183, 255);
       margin: 0 5px;
 
       p {
