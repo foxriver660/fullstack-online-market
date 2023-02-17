@@ -3,7 +3,7 @@ import classes from "./Header.module.scss";
 import { Link, NavLink } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
-import {VscChromeClose} from "react-icons/vsc";
+import { VscChromeClose } from "react-icons/vsc";
 
 const logo = (
   <div className={classes.logo}>
@@ -23,7 +23,8 @@ const cart = (
     </Link>
   </span>
 );
-const activeLink = ({isActive})=>isActive ? classes.active : classes.navLink
+const activeLink = ({ isActive }) =>
+  isActive ? classes.active : classes.navLink;
 const Header = () => {
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => {
@@ -50,7 +51,9 @@ const Header = () => {
             onClick={hideMenu}
           ></div>
           <ul onClick={hideMenu} className={classes.navList}>
-            <li className={`${classes.navItem} ${classes.logoMobile}`}>{logo} <VscChromeClose onClick={hideMenu} size={30}/></li>
+            <li className={`${classes.navItem} ${classes.logoMobile}`}>
+              {logo} <VscChromeClose onClick={hideMenu} size={30} />
+            </li>
             <li className={classes.navItem}>
               <NavLink className={activeLink} to="/">
                 Главная страница
@@ -65,15 +68,15 @@ const Header = () => {
           </ul>
           <div className={classes.rigthNavBar} onClick={hideMenu}>
             <span className={classes.links}>
-              <Link className={classes.navLink} to="/login">
+              <NavLink className={activeLink} to="/login">
                 Войти
-              </Link>
-              <Link className={classes.navLink} to="/register">
+              </NavLink>
+              <NavLink className={activeLink} to="/register">
                 Регистрация
-              </Link>
-              <Link className={classes.navLink} to="/order-history">
+              </NavLink>
+              <NavLink className={activeLink} to="/order-history">
                 Мои заказы
-              </Link>
+              </NavLink>
             </span>
             {cart}
           </div>

@@ -102,7 +102,9 @@
     cursor: pointer;
     display: none;
   }
-  .logoMobile{display: none}
+  .logoMobile {
+    display: none;
+  }
   @media screen and (max-width: 800px) {
     .nav {
       display: block;
@@ -213,12 +215,9 @@
   }
 }
 
-
-
+// ВЫДЕЛЕНИЕ АКТИВНОЙ СТРАНИЦЫ
 .active {
   position: relative;
   color: var(--color-danger);
   text-decoration: none;
 }
-
-
