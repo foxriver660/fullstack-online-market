@@ -1,12 +1,14 @@
-import React from "react";
+import React, { useEffect } from "react";
 import classes from "./Header.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import { signOut } from "firebase/auth";
+import {FaUserCircle} from "react-icons/fa";
+
+import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import {  toast } from "react-toastify";
+import { toast } from "react-toastify";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -30,8 +32,10 @@ const activeLink = ({ isActive }) =>
 
 const Header = () => {
   const navigate = useNavigate();
+  const [userName, setUserName] = React.useState("");
+
   /* const [user, setUser] = React.useState(null); */
-/*   React.useEffect(() => {
+  /*   React.useEffect(() => {
     const unsubscribe = auth.onAuthStateChanged((user) => {
       setUser(user);
     });
@@ -44,6 +48,18 @@ const Header = () => {
     });
   }; */
   const [showMenu, setShowMenu] = React.useState(false);
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        const uid = user.uid;
+        console.log(user.displayName);
+        setUserName(user.displayName);
+      } else {
+        setUserName("");
+      }
+    });
+  }, []);
+
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
@@ -55,12 +71,12 @@ const Header = () => {
       .then(() => {
         toast.success("Вы успешно вышли из системы");
         navigate("/");
-        
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
+
   return (
     <header className={classes.header}>
       <div className={classes.mainWrapper}>
@@ -99,6 +115,11 @@ const Header = () => {
               <NavLink className={activeLink} to="/login">
                 Войти
               </NavLink>
+              <a href="#">
+                <FaUserCircle size={16}/>
+                Привет, {userName}
+
+              </a>
               <NavLink className={activeLink} to="/register">
                 Регистрация
               </NavLink>
