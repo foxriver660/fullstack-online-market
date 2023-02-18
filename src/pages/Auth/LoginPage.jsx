@@ -4,9 +4,14 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Card } from "../../components/index";
 import loginImg from "../../images/kisspng-offer-and-acceptance-contract-of-sale-proposal-zak-inventory-management-software-5b1e5574946513.3219275815287146126079.jpg";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import {
+  GoogleAuthProvider,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { ToastContainer, toast } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 import Loader from "../../components/Loader/Loader";
 const LoginPage = () => {
   const [email, setEmail] = React.useState("");
@@ -22,16 +27,28 @@ const LoginPage = () => {
         const user = userCredential.user;
         setIsLoading(false);
         toast.success(`Вы вошли!`);
-        
       })
       .catch((error) => {
         toast.error(error.message);
         setIsLoading(false);
       });
   };
+  // Google Login
+  const provider = new GoogleAuthProvider();
+  const signInWithGoogle = (e) => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        toast.success(`Вы вошли!`);
+        navigate("/");
+        
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
+  };
   return (
     <>
-      <ToastContainer />
       {isLoading && <Loader />}
       <section className={`container ${classes.auth}`}>
         <div className={classes.img}>
@@ -62,7 +79,11 @@ const LoginPage = () => {
                 Забыли пароль?<Link to="/reset">Восстановить пароль</Link>
               </span>
             </form>
-            <button className="--btn --btn-google --btn-block" type="submit">
+            <button
+              className="--btn --btn-google --btn-block"
+              type="submit"
+              onClick={signInWithGoogle}
+            >
               <FcGoogle /> Login with Google
             </button>
             <span className={classes.register}>

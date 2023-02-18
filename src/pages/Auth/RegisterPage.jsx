@@ -40,7 +40,7 @@ const RegisterPage = () => {
 
   return (
     <>
-      <ToastContainer />
+      
       {isLoading && <Loader />}
       <section className={`container ${classes.auth}`}>
         <Card>

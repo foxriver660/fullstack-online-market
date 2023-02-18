@@ -1,10 +1,12 @@
 import React from "react";
 import classes from "./Header.module.scss";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-
+import { signOut } from "firebase/auth";
+import { auth } from "../../firebase/config";
+import {  toast } from "react-toastify";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -25,13 +27,39 @@ const cart = (
 );
 const activeLink = ({ isActive }) =>
   isActive ? classes.active : classes.navLink;
+
 const Header = () => {
+  const navigate = useNavigate();
+  /* const [user, setUser] = React.useState(null); */
+/*   React.useEffect(() => {
+    const unsubscribe = auth.onAuthStateChanged((user) => {
+      setUser(user);
+    });
+    return () => unsubscribe();
+  }, []);
+  const handleSignOut = () => {
+    signOut(auth).then(() => {
+      setUser(null);
+      navigate("/");
+    });
+  }; */
   const [showMenu, setShowMenu] = React.useState(false);
   const toggleMenu = () => {
     setShowMenu(!showMenu);
   };
   const hideMenu = () => {
     setShowMenu(false);
+  };
+  const logoutUser = () => {
+    signOut(auth)
+      .then(() => {
+        toast.success("Вы успешно вышли из системы");
+        navigate("/");
+        
+      })
+      .catch((error) => {
+        toast.error(error.message);
+      });
   };
   return (
     <header className={classes.header}>
@@ -76,6 +104,9 @@ const Header = () => {
               </NavLink>
               <NavLink className={activeLink} to="/order-history">
                 Мои заказы
+              </NavLink>
+              <NavLink to="/" onClick={logoutUser}>
+                Выйти
               </NavLink>
             </span>
             {cart}
