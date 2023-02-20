@@ -10,7 +10,10 @@ import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux/es/exports";
-import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
+import {
+  SET_ACTIVE_USER,
+  REMOVE_ACTIVE_USER,
+} from "../../redux/slice/authSlice";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -46,12 +49,10 @@ const Header = () => {
         /*  console.log(user); */
         if (user.displayName === null) {
           const uName = user.email.split("@")[0];
-         
           setUserName(uName);
-        } else { setUserName(user.displayName);
+        } else {
+          setUserName(user.displayName);
         }
-        
-
 
         dispatch(
           SET_ACTIVE_USER({
@@ -75,6 +76,7 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
+        dispatch(REMOVE_ACTIVE_USER());
         toast.success("Вы успешно вышли из системы");
         navigate("/");
       })
@@ -118,13 +120,16 @@ const Header = () => {
           </ul>
           <div className={classes.rigthNavBar} onClick={hideMenu}>
             <span className={classes.links}>
-              <NavLink className={activeLink} to="/login">
-                Войти
-              </NavLink>
-              <a href="#">
-                <FaUserCircle size={16} />
-                Привет, {userName}
-              </a>
+              {userName ? (
+                <a href="#">
+                  <FaUserCircle size={16} />
+                  Привет, {userName}
+                </a>
+              ) : (
+                <NavLink className={activeLink} to="/login">
+                  Войти
+                </NavLink>
+              )}
               <NavLink className={activeLink} to="/register">
                 Регистрация
               </NavLink>
