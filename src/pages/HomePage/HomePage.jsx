@@ -1,9 +1,10 @@
 import React from 'react'
+import Slider from '../../components/Slider/Slider'
 import classes from './HomePage.module.scss'
 const HomePage = () => {
   return (
-    <section className={classes.container}>
-      HomePage
+    <section>
+      <Slider/>
     </section>
   )
 }
