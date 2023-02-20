@@ -16,7 +16,7 @@ import {
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminOnlyRoute from "./components/AdminOnlyRoute/AdminOnlyRoute";
-console.log(AdminPage)
+
 function App() {
   return (
     <>
