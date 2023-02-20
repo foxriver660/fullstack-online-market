@@ -9,7 +9,7 @@ const Slider = () => {
   const slideLength = sliderData.length - 1;
 
   // AUTO SLIDE
-  const autoScroll = true;
+  const autoScroll = false;
   let interval = 6000;
   useEffect(() => {
     if (autoScroll) {
@@ -41,9 +41,9 @@ const Slider = () => {
           >
             {index === activeSlide && (
               <>
-                <img src={slide.image} alt={slide.heading} />
+                <img className="slide_image" src={slide.image} alt={slide.heading} />
                 <div className="content">
-                  <h3>{slide.heading}</h3>
+                  <h3 className="slide_title">{slide.heading}</h3>
                   <p>{slide.desc}</p>
                   <a className="--btn --btn-primary" href="#products">
                     Начать покупки!
