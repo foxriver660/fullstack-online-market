@@ -108,7 +108,7 @@ const Header = () => {
             <li className={`${classes.navItem} ${classes.logoMobile}`}>
               {logo} <VscChromeClose onClick={hideMenu} size={30} />
             </li>
-            <li></li>
+            <li>
               <AdminOnlyRoute>
               <button className="--btn --btn-primary">Admin</button></AdminOnlyRoute>
             </li>
