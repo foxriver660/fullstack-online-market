@@ -1,5 +1,5 @@
-import test1 from "../../images/xiaomi-mi-6x-nepaletrend.jpg";
-import test2 from "../../images/1439753859_samsarasklad-4.jpg";
+import test1 from "../../images/1.jpg";
+import test2 from "../../images/2.jpg";
 import test3 from "../../images/OnePlus-7-Pro-1.jpg";
 
 export const sliderData = [
