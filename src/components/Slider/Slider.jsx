@@ -6,13 +6,23 @@ import { AiOutlineArrowLeft, AiOutlineArrowRight } from "react-icons/ai";
 
 const Slider = () => {
   const [activeSlide, setActiveSlide] = React.useState(0);
-const slideLength = sliderData.length;
-console.log(slideLength);
+  const slideLength = sliderData.length - 1;
+
+  const nextSlide = () => {
+    setActiveSlide((prevActiveSlide) =>
+      prevActiveSlide === slideLength ? 0 : prevActiveSlide + 1
+    );
+  };
+  const prevSlide = () => {
+    setActiveSlide((prevActiveSlide) =>
+      prevActiveSlide === 0 ? slideLength : prevActiveSlide - 1
+    );
+  };
 
   return (
     <div className="slider">
-      <AiOutlineArrowLeft className="arrow prev" />
-      <AiOutlineArrowRight className="arrow next" />
+      <AiOutlineArrowLeft className="arrow prev" onClick={prevSlide} />
+      <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
       {sliderData.map((slide, index) => {
         return (
           <div
@@ -22,9 +32,12 @@ console.log(slideLength);
             {index === activeSlide && (
               <>
                 <img src={slide.image} alt={slide.heading} />
-                <div className="content"><h3>{slide.heading}</h3>
-                <p>{slide.desc}</p>
-                 <a className="--btn --btn-primary" href="#products">Начать покупки!</a>
+                <div className="content">
+                  <h3>{slide.heading}</h3>
+                  <p>{slide.desc}</p>
+                  <a className="--btn --btn-primary" href="#products">
+                    Начать покупки!
+                  </a>
                 </div>
               </>
             )}
