@@ -53,9 +53,11 @@
 
   .rigthNavBar {
     display: flex;
+    align-items: center;
 
     .cart .cartLink {
       display: flex;
+      align-items: center;
       color: var(--color-white);
       position: relative;
       &:hover {

@@ -40,9 +40,37 @@ section {
   padding: 4rem 0;
 }
 
-
+.container{
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
 /* UTILITY CLASSES */
-
+.--btn {
+  font-size: 1.6rem;
+  font-weight: 400;
+  padding: 6px 8px;
+  margin: 0 5px 0 0;
+  border: 1px solid transparent;
+  border-radius: 8px;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s;
+}
+.--btn-primary {
+  color: #fff;
+  background: #007bff;
+}
+.--btn-block {
+  width: 100%;
+}
+.--btn-google {
+  color: var(--dark-blue);
+  background: #fff;
+  outline: 2px solid var(--dark-blue);
+}
 /* Flex */
 .--flex-center {
   display: flex;
@@ -108,13 +136,13 @@ p {
 
 
 a {
-  font-size: 1.4rem;
-  color: var(--dark-blue);
+  font-size: 1rem;
+  color: var(--color-primary);
   text-decoration: none;
   transition: all 0.2s;
 }
 
 a:hover {
-  color: var(--color-dark);
-  font-size: 1.5rem;
+  color: var(--color-danger);
+  
 }
