@@ -4,12 +4,13 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
-import {FaUserCircle} from "react-icons/fa";
+import { FaUserCircle } from "react-icons/fa";
 
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
 import { useDispatch } from "react-redux/es/exports";
+import { SET_ACTIVE_USER } from "../../redux/slice/authSlice";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -34,17 +35,31 @@ const activeLink = ({ isActive }) =>
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  
+
   const [userName, setUserName] = React.useState("");
 
-  
   const [showMenu, setShowMenu] = React.useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        const uid = user.uid;
-        console.log(user.displayName);
-        setUserName(user.displayName);
+        /*  const uid = user.uid; */
+        /*  console.log(user); */
+        if (user.displayName === null) {
+          const uName = user.email.split("@")[0];
+         
+          setUserName(uName);
+        } else { setUserName(user.displayName);
+        }
+        
+
+
+        dispatch(
+          SET_ACTIVE_USER({
+            email: user.email,
+            userName: user.displayName ? user.displayName : userName,
+            userId: user.uid,
+          })
+        );
       } else {
         setUserName("");
       }
@@ -107,9 +122,8 @@ const Header = () => {
                 Войти
               </NavLink>
               <a href="#">
-                <FaUserCircle size={16}/>
+                <FaUserCircle size={16} />
                 Привет, {userName}
-
               </a>
               <NavLink className={activeLink} to="/register">
                 Регистрация
