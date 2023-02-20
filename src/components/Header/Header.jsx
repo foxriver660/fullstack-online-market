@@ -15,7 +15,7 @@ import {
   REMOVE_ACTIVE_USER,
 } from "../../redux/slice/authSlice";
 import { ShowOnLogin, ShowOnLogOut } from "../HiddenLinks/HiddenLinks";
-import AdminOnlyRoute from "../AdminOnlyRoute/AdminOnlyRoute";
+import AdminOnlyRoute, { AdminOnlyLink } from "../AdminOnlyRoute/AdminOnlyRoute";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -109,8 +109,8 @@ const Header = () => {
               {logo} <VscChromeClose onClick={hideMenu} size={30} />
             </li>
             <li>
-              <AdminOnlyRoute>
-              <Link to='/admin' className="--btn --btn-primary">Admin</Link></AdminOnlyRoute>
+              <AdminOnlyLink>
+              <Link to='/admin' className="--btn --btn-primary">Admin</Link></AdminOnlyLink>
             </li>
             <li className={classes.navItem}>
               <NavLink className={activeLink} to="/">
