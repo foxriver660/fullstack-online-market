@@ -110,7 +110,7 @@ const Header = () => {
             </li>
             <li>
               <AdminOnlyRoute>
-              <button className="--btn --btn-primary">Admin</button></AdminOnlyRoute>
+              <Link to='/admin' className="--btn --btn-primary">Admin</Link></AdminOnlyRoute>
             </li>
             <li className={classes.navItem}>
               <NavLink className={activeLink} to="/">
