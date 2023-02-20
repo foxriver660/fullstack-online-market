@@ -9,6 +9,7 @@ import {FaUserCircle} from "react-icons/fa";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
+import { useDispatch } from "react-redux/es/exports";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -32,21 +33,11 @@ const activeLink = ({ isActive }) =>
 
 const Header = () => {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  
   const [userName, setUserName] = React.useState("");
 
-  /* const [user, setUser] = React.useState(null); */
-  /*   React.useEffect(() => {
-    const unsubscribe = auth.onAuthStateChanged((user) => {
-      setUser(user);
-    });
-    return () => unsubscribe();
-  }, []);
-  const handleSignOut = () => {
-    signOut(auth).then(() => {
-      setUser(null);
-      navigate("/");
-    });
-  }; */
+  
   const [showMenu, setShowMenu] = React.useState(false);
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
