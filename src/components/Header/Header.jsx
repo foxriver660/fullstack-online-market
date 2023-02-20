@@ -14,6 +14,7 @@ import {
   SET_ACTIVE_USER,
   REMOVE_ACTIVE_USER,
 } from "../../redux/slice/authSlice";
+import { ShowOnLogin, ShowOnLogOut } from "../HiddenLinks/HiddenLinks";
 const logo = (
   <div className={classes.logo}>
     <Link className={classes.logoLink} to="/">
@@ -27,7 +28,7 @@ const logo = (
 const cart = (
   <span className={classes.cart}>
     <Link className={classes.cartLink} to="/cart">
-      Корзина <BsCart4 size={20} />
+      Корзина <BsCart4 size={16} />
       <p>0</p>
     </Link>
   </span>
@@ -63,9 +64,10 @@ const Header = () => {
         );
       } else {
         setUserName("");
+        dispatch(REMOVE_ACTIVE_USER());
       }
     });
-  }, []);
+  }, [dispatch, userName]);
 
   const toggleMenu = () => {
     setShowMenu(!showMenu);
@@ -76,7 +78,6 @@ const Header = () => {
   const logoutUser = () => {
     signOut(auth)
       .then(() => {
-        dispatch(REMOVE_ACTIVE_USER());
         toast.success("Вы успешно вышли из системы");
         navigate("/");
       })
@@ -120,32 +121,35 @@ const Header = () => {
           </ul>
           <div className={classes.rigthNavBar} onClick={hideMenu}>
             <span className={classes.links}>
-              {userName ? (
+              <ShowOnLogOut>
+                <NavLink className={activeLink} to="/login">
+                  Войти
+                </NavLink>
+                <NavLink className={activeLink} to="/register">
+                  Регистрация
+                </NavLink>
+              </ShowOnLogOut>
+
+              <ShowOnLogin>
                 <a href="#">
                   <FaUserCircle size={16} />
                   Привет, {userName}
                 </a>
-              ) : (
-                <NavLink className={activeLink} to="/login">
-                  Войти
+                <NavLink className={activeLink} to="/order-history">
+                  Мои заказы
                 </NavLink>
-              )}
-              <NavLink className={activeLink} to="/register">
-                Регистрация
-              </NavLink>
-              <NavLink className={activeLink} to="/order-history">
-                Мои заказы
-              </NavLink>
-              <NavLink to="/" onClick={logoutUser}>
-                Выйти
-              </NavLink>
+
+                <NavLink to="/" onClick={logoutUser}>
+                  Выйти
+                </NavLink>
+              </ShowOnLogin>
             </span>
             {cart}
           </div>
         </nav>
         <div className={classes.menuIcon}>
           {cart}
-          <GiHamburgerMenu size={26} onClick={toggleMenu} />
+          <GiHamburgerMenu size={30} onClick={toggleMenu} />
         </div>
       </div>
     </header>
