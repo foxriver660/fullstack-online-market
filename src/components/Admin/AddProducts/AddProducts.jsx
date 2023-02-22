@@ -68,7 +68,7 @@ const AddProducts = () => {
             ...product,
             imageURL: downloadURL,
           });
-          toast.success("Product added successfully");
+          toast.success("Product IMG added successfully");
         });
       }
     );
