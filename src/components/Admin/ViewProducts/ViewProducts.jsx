@@ -16,8 +16,11 @@ import Loader from "../../../components/Loader/Loader";
 import { async } from "@firebase/util";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
-
+import { useDispatch } from "react-redux";
+import { STORE_PRODUCTS } from "../../../redux/slice/productSlice";
 const ViewProducts = () => {
+  const dispatch = useDispatch();
+
   const [products, setProducts] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
@@ -29,14 +32,19 @@ const ViewProducts = () => {
     setIsLoading(true);
     try {
       const productsRef = collection(db, "products");
-      const q = query(productsRef, orderBy("createdAt", "desc"));
+      const q = query(productsRef, orderBy("name", "desc"));
 
       onSnapshot(q, (snapshot) => {
-        console.log(snapshot.docs);
-        setProducts(
-          snapshot.docs.map((doc) => ({ ...doc.data(), id: doc.id }))
-        );
+        const allProduct = snapshot.docs.map((doc) => ({
+          ...doc.data(),
+          id: doc.id,
+          createdAt: `${doc.data().createdAt.toDate()}`,
+        }));
+        console.log(allProduct);
+
+        setProducts(allProduct);
         setIsLoading(false);
+        dispatch(STORE_PRODUCTS(allProduct));
       });
     } catch (error) {
       setIsLoading(false);
