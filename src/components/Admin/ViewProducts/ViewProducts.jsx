@@ -18,6 +18,7 @@ import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import { useDispatch } from "react-redux";
 import { STORE_PRODUCTS } from "../../../redux/slice/productSlice";
+
 const ViewProducts = () => {
   const dispatch = useDispatch();
 
@@ -38,9 +39,9 @@ const ViewProducts = () => {
         const allProduct = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
-          createdAt: `${doc.data().createdAt.toDate()}`,
+          createdAt: typeof doc.data().createdAt === 'string' ? doc.data().createdAt : `${doc.data().createdAt.toDate()}`,
+          
         }));
-        console.log(allProduct);
 
         setProducts(allProduct);
         setIsLoading(false);
@@ -52,6 +53,7 @@ const ViewProducts = () => {
     }
   };
 
+  // !NOTIFLIX
   const confirmDelete = (id, image) => {
     Notiflix.Confirm.show(
       "Удалить продукт?",
@@ -120,7 +122,7 @@ const ViewProducts = () => {
                   <td>{product.category}</td>
                   <td>{`${product.price} р.`}</td>
                   <td>
-                    <Link to={`/admin/addproducts`}>
+                    <Link to={`/admin/addproducts/${product.id}`}>
                       <FaEdit size={20} color="green" />
                     </Link>
                     &nbsp;

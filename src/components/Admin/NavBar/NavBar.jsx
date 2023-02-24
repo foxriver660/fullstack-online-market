@@ -25,7 +25,7 @@ const NavBar = () => {
           <NavLink to="/admin/viewproducts" className={activeLink}>View products</NavLink>
         </li>
         <li className={classes.navItem}>
-          <NavLink to="/admin/addproducts" className={activeLink}>Add products</NavLink>
+          <NavLink to="/admin/addproducts/ADD" className={activeLink}>Add products</NavLink>
         </li>
         <li className={classes.navItem}>
           <NavLink to="/admin/orders" className={activeLink}>Orders</NavLink>
