@@ -3,11 +3,11 @@ import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { db } from "../firebase/config";
 
-const useFetchCollection = () => {
+const useFetchCollection = (collectionName) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(false);
 
-  const getCollection = ({ collectionName }) => {
+  const getCollection = () => {
     setIsLoading(true);
     try {
       const docRef = collection(db, collectionName);

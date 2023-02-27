@@ -1,11 +1,4 @@
-import {
-  collection,
-  deleteDoc,
-  doc,
-  onSnapshot,
-  orderBy,
-  query,
-} from "firebase/firestore";
+import { deleteDoc, doc } from "firebase/firestore";
 import React, { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
@@ -13,45 +6,22 @@ import classes from "./ViewProducts.module.scss";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
 import Loader from "../../../components/Loader/Loader";
-import { async } from "@firebase/util";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { STORE_PRODUCTS } from "../../../redux/slice/productSlice";
+import useFetchCollection from "../../../hook/useFetchCollection";
+import { selectProduct } from "../../../redux/slice/productSlice";
 
 const ViewProducts = () => {
   const dispatch = useDispatch();
+  const products = useSelector(selectProduct);
 
-  const [products, setProducts] = useState([]);
-  const [isLoading, setIsLoading] = useState(false);
+  const { data, isLoading } = useFetchCollection("products");
 
   useEffect(() => {
-    fetchProducts();
-  }, []);
-
-  const fetchProducts = () => {
-    setIsLoading(true);
-    try {
-      const productsRef = collection(db, "products");
-      const q = query(productsRef, orderBy("name", "desc"));
-
-      onSnapshot(q, (snapshot) => {
-        const allProduct = snapshot.docs.map((doc) => ({
-          ...doc.data(),
-          id: doc.id,
-          createdAt: typeof doc.data().createdAt === 'string' ? doc.data().createdAt : `${doc.data().createdAt.toDate()}`,
-          
-        }));
-
-        setProducts(allProduct);
-        setIsLoading(false);
-        dispatch(STORE_PRODUCTS(allProduct));
-      });
-    } catch (error) {
-      setIsLoading(false);
-      toast.error(error.message);
-    }
-  };
+    dispatch(STORE_PRODUCTS(data));
+  }, [dispatch, data]);
 
   // !NOTIFLIX
   const confirmDelete = (id, image) => {
