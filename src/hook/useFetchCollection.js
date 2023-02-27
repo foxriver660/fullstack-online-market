@@ -23,7 +23,7 @@ const useFetchCollection = (collectionName) => {
               ? doc.data().createdAt
               : `${doc.data().createdAt.toDate()}`,
         }));
-        console.log(allData);
+
         setData(allData);
         setIsLoading(false);
       });
