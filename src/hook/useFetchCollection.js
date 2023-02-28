@@ -18,10 +18,10 @@ const useFetchCollection = (collectionName) => {
         const allData = snapshot.docs.map((doc) => ({
           ...doc.data(),
           id: doc.id,
-          createdAt:
+          /* createdAt:
             typeof doc.data().createdAt === "string"
               ? doc.data().createdAt
-              : `${doc.data().createdAt.toDate()}`,
+              : `${doc.data().createdAt.toDate()}`, */
         }));
 
         setData(allData);

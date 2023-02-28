@@ -1,5 +1,10 @@
 import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
-import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
+import {
+  deleteObject,
+  getDownloadURL,
+  ref,
+  uploadBytesResumable,
+} from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
@@ -46,7 +51,6 @@ const AddProducts = () => {
     const newState = detectForm(id, { ...initialState }, productEdit);
     return newState;
   });
-  console.log(product);
 
   const [progress, setProgress] = useState(0);
   const [isLoading, setIsLoading] = useState(false);
