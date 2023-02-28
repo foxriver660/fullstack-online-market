@@ -71,6 +71,9 @@ section {
   background: #fff;
   outline: 2px solid var(--dark-blue);
 }
+.--btn-danger{
+  background: var(--color-danger)
+}
 /* Flex */
 .--flex-center {
   display: flex;
