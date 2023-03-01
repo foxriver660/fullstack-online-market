@@ -10,8 +10,8 @@ const ProductsList = ({ products }) => {
   const [search, setSearch] = useState("");
 
   return (
-    <div className={classes.product_list}>
-      <div className={classes.top} id="product">
+    <div className={classes.product_list} id="product">
+      <div className={classes.top} >
         <div className={classes.icons}>
           <BsFillGridFill size={22} onClick={() => setGrid(true)} />
           <FaListAlt size={22} onClick={() => setGrid(false)} />

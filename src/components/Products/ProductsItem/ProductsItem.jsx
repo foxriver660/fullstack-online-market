@@ -14,9 +14,9 @@ const ProductsItem = ({ grid, product, id, name, price, desc, imageURL }) => {
 
   return (
     <Card className={grid ? classes.grid : classes.list}>
-      <Link to="/product-details">
+      <Link to={`/product-details/${id}`}>
         <div className={classes.img}>
-          <img src={imageURL} alt={name} />
+          <img className={classes.img} src={imageURL} alt={name} />
         </div>
       </Link>
       <div className={classes.content}>

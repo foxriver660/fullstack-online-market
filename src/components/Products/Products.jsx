@@ -22,6 +22,7 @@ const Products = () => {
           <ProductsFilter />
         </aside>
         <div className={classes.content}>
+          
           <ProductsList products={products} />
         </div>
       </div>

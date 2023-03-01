@@ -1,14 +1,27 @@
-import React from 'react'
-import { Products } from '../../components/index'
-import Slider from '../../components/Slider/Slider'
-import classes from './HomePage.module.scss'
+import React, { useEffect } from "react";
+import { Products } from "../../components/index";
+import Slider from "../../components/Slider/Slider";
+import classes from "./HomePage.module.scss";
 const HomePage = () => {
+  const url = window.location.href;
+  console.log(url);
+/*   const scrollToProduct = () => {
+    if (url.includes("product")) {
+      window.scrollTo({
+        top: 1300,
+        behavior: "smooth",
+      });
+    }
+  }; 
+  useEffect(() => {
+    scrollToProduct();
+  }, []); */
   return (
     <section>
-      {/* <Slider/> */}
-      <Products/>
+      {/* <Slider /> */}
+      <Products />
     </section>
-  )
-}
+  );
+};
 
-export default HomePage
+export default HomePage;
