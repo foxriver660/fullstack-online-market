@@ -9,17 +9,37 @@ const filterSlice = createSlice({
   initialState,
   reducers: {
     FILTER_BY_SEARCH: (state, action) => {
-      const tempProducts = action.payload.products.filter((product) => {
-        return product.name
-          .toLowerCase()
-          .includes(action.payload.search.toLowerCase());
+      const { products, search } = action.payload;
+
+      const tempProducts = products.filter((product) => {
+        return product.name.toLowerCase().includes(search.toLowerCase());
       });
       state.filterProducts = tempProducts;
     },
     SORT_PRODUCTS: (state, action) => {
       console.log(action.payload);
-
-    }
+      const { products, sort } = action.payload;
+      let tempProducts = [];
+      if (sort === "latest") {
+        tempProducts = [...products].sort((a, b) => {
+          return a.createdAt - b.createdAt;
+          
+        });
+      }
+      if (sort === "lowest-price") {
+        tempProducts = [...products].sort((a, b) => {
+          return a.price - b.price;
+          
+        });
+      }
+      if (sort === "highest-price") {
+        tempProducts = [...products].sort((a, b) => {
+          return b.price - a.price;
+          
+        });
+      }
+      state.filterProducts = tempProducts;
+    },
   },
 });
 

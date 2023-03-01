@@ -13,6 +13,7 @@ import {
 const ProductsList = ({ products }) => {
   const dispatch = useDispatch();
   const filteredList = useSelector(selectFilterProducts);
+console.log(filteredList);
 
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
@@ -50,8 +51,7 @@ const ProductsList = ({ products }) => {
             <option value="latest">Новинки</option>
             <option value="lowest-price">Низкая цена</option>
             <option value="highest-price">Высокая цена</option>
-            <option value="a-z">A-Z</option>
-            <option value="z-a">Z-A</option>
+         
           </select>
         </div>
       </div>
