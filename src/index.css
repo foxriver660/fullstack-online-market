@@ -37,7 +37,7 @@ body {
 
 section {
   width: 100%;
-  padding: 4rem 0;
+  padding: 0;
 }
 
 .container{
@@ -70,6 +70,10 @@ section {
   color: var(--dark-blue);
   background: #fff;
   outline: 2px solid var(--dark-blue);
+}
+.--btn-danger{
+  color: #fff;
+  background: var(--color-danger)
 }
 /* Flex */
 .--flex-center {
