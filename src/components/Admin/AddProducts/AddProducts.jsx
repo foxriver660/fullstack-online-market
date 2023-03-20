@@ -11,7 +11,7 @@ import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
 import Card from "../../Card/Card";
 import classes from "./AddProducts.module.scss";
-import Loader from "../../Loader/Loader";
+
 import { useSelector } from "react-redux";
 import { selectProduct } from "../../../redux/slice/productSlice";
 

@@ -13,7 +13,6 @@ import {
 const ProductsList = ({ products }) => {
   const dispatch = useDispatch();
   const filteredList = useSelector(selectFilterProducts);
-console.log(filteredList);
 
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");

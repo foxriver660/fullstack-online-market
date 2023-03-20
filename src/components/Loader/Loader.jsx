@@ -1,4 +1,4 @@
-import ReactDOM from 'react-dom'
+/* import ReactDOM from 'react-dom'
 import classes from './Loader.module.scss'
 
 const Loader = () => {
@@ -12,4 +12,4 @@ const Loader = () => {
   )
 }
 
-export default Loader
+export default Loader */
