@@ -4,7 +4,7 @@ import ProductsFilter from "./ProductsFilter/ProductsFilter";
 import ProductsList from "./ProductsList/ProductsList";
 import useFetchCollection from "../../hook/useFetchCollection";
 import { useDispatch, useSelector } from "react-redux";
-import { selectProduct, STORE_PRODUCTS } from "../../redux/slice/productSlice";
+import { GET_PRICE_RANGE, selectProduct, STORE_PRODUCTS } from "../../redux/slice/productSlice";
 const Products = () => {
   const dispatch = useDispatch();
 
@@ -12,6 +12,7 @@ const Products = () => {
   const products = useSelector(selectProduct);
   useEffect(() => {
     dispatch(STORE_PRODUCTS(data));
+    dispatch(GET_PRICE_RANGE({products: data}));
   }, [dispatch, data]);
   
 
