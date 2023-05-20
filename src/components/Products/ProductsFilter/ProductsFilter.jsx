@@ -41,6 +41,12 @@ const ProductsFilter = () => {
     setCategory(cat);
     dispatch(FILTER_BY_CATEGORY({ products, cat }));
   };
+  const clearFilters = () => {
+    setCategory("Все")
+    setBrand('Все');
+    setPrice(maxPrice);
+  };
+
   return (
     <div className={classes.filter}>
       <h4 className={classes.title}>Категория</h4>
@@ -82,7 +88,7 @@ const ProductsFilter = () => {
         />
       </div>
       <br />
-      <button className="--btn --btn-primary">Очистить фильтр</button>
+      <button className="--btn --btn-primary" onClick={clearFilters}>Очистить фильтр</button>
     </div>
   );
 };
