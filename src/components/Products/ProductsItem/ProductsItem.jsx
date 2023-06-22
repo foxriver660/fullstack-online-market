@@ -2,7 +2,11 @@ import React from "react";
 import classes from "./ProductsItem.module.scss";
 import Card from "../../Card/Card";
 import { Link } from "react-router-dom";
+import { ADD_TO_CARD } from "../../../redux/slice/cardSlice";
+import { useDispatch } from "react-redux";
+
 const ProductsItem = ({ grid, product, id, name, price, desc, imageURL }) => {
+  const dispatch = useDispatch();
   // РЕГУЛИРУЕМ ДЛИНУ ТЕКСТА
   const shortenText = (text, n) => {
     if (text.length > n) {
@@ -11,7 +15,9 @@ const ProductsItem = ({ grid, product, id, name, price, desc, imageURL }) => {
       return text;
     }
   };
-
+  const addToCard = (product) => {
+    dispatch(ADD_TO_CARD(product));
+  };
   return (
     <Card className={grid ? classes.grid : classes.list}>
       <Link to={`/product-details/${id}`}>
@@ -25,7 +31,7 @@ const ProductsItem = ({ grid, product, id, name, price, desc, imageURL }) => {
           <h4>{shortenText(name, 15)}</h4>
         </div>
         {!grid && <p className={classes.desc}>{shortenText(desc, 200)}</p>}
-        <button type="button" className="--btn --btn-danger">
+        <button type="button" className="--btn --btn-danger" onClick={() => addToCard(product)}>
           Добавить в корзину
         </button>
       </div>

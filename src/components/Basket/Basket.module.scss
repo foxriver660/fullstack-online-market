@@ -1,0 +1,18 @@
+.cart .cartLink {
+  display: flex;
+  align-items: center;
+  color: var(--color-white);
+  position: relative;
+  &:hover {
+    color: orangered;
+  }
+  &.active {
+    color: var(--color-danger);
+  }
+  p {
+    position: absolute;
+    top: -1rem;
+    right: -1rem;
+    font-weight: 500;
+  }
+}

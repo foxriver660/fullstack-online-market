@@ -3,16 +3,7 @@ import "./App.scss";
 // COMPONENTS
 import { Header, Footer } from "./components/index";
 // PAGES
-import {
-  HomePage,
-  ContactPage,
-  CartPage,
-  AdminPage,
-  OrderPage,
-  LoginPage,
-  RegisterPage,
-  ResetPage,
-} from "./pages";
+import { HomePage, ContactPage, AdminPage, OrderPage, LoginPage, RegisterPage, ResetPage, BasketPage } from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminOnlyRoute from "./components/AdminOnlyRoute/AdminOnlyRoute";
@@ -31,7 +22,15 @@ function App() {
           <Route path="/register" element={<RegisterPage />} />
           <Route path="/reset" element={<ResetPage />} />
           <Route path="/product-details/:id" element={<ProductsDetails />} />
-          <Route path="/admin/*" element={<AdminOnlyRoute><AdminPage /></AdminOnlyRoute>} />
+          <Route path="/basket" element={<BasketPage />} />
+          <Route
+            path="/admin/*"
+            element={
+              <AdminOnlyRoute>
+                <AdminPage />
+              </AdminOnlyRoute>
+            }
+          />
         </Routes>
         <Footer />
       </BrowserRouter>
