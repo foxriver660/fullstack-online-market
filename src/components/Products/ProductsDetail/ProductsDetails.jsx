@@ -4,12 +4,18 @@ import { useParams, useNavigate } from "react-router-dom";
 import { doc, getDoc } from "firebase/firestore";
 import { db } from "../../../firebase/config";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { ADD_TO_CARD, CALCULATE_TOTAL_QUANTITY, DECREASE_CARD, selectCardItems } from "../../../redux/slice/cardSlice";
 const ProductsDetails = () => {
   const navigate = useNavigate();
-
+  const dispatch = useDispatch();
+  const basketItems = useSelector(selectCardItems);
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-
+  const card = basketItems.find((card) => card.id === id);
+  const isBasketAdded = basketItems.findIndex((card) => {
+    return card.id === id;
+  });
   const getProduct = async () => {
     const docRef = doc(db, "products", id);
     const docSnap = await getDoc(docRef);
@@ -20,13 +26,22 @@ const ProductsDetails = () => {
       toast.error("Продукт не найден");
     }
   };
+  const addToBasket = (product) => {
+    dispatch(ADD_TO_CARD(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
+  const decreaseBasket = (product) => {
+    dispatch(DECREASE_CARD(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  };
   useEffect(() => {
     getProduct();
   }, [id]);
 
   const goBack = () => {
-    navigate('/#product');
+    navigate("/#product");
   };
+  console.log(isBasketAdded);
   return (
     <section>
       <div className={`container ${classes.product}`}>
@@ -49,11 +64,21 @@ const ProductsDetails = () => {
                   <b>Брэнд:</b> {product.brand}
                 </p>
                 <div className={classes.count}>
-                  <button className="--btn">-</button>
-                  <p>1</p>
-                  <button className="--btn">+</button>
+                  {isBasketAdded < 0 ? null : (
+                    <>
+                      <button className="--btn" onClick={() => decreaseBasket(product)}>
+                        -
+                      </button>
+                      <p>
+                        <b>{card.cardQuantity}</b>
+                      </p>
+                      <button className="--btn" onClick={() => addToBasket(product)}>
+                        +
+                      </button>
+                    </>
+                  )}
                 </div>
-                <button className="--btn --btn-danger">
+                <button onClick={() => addToBasket(product)} className="--btn --btn-danger">
                   Добавить в корзину
                 </button>
               </div>
