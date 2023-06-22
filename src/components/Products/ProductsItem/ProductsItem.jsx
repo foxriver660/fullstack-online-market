@@ -2,22 +2,18 @@ import React from "react";
 import classes from "./ProductsItem.module.scss";
 import Card from "../../Card/Card";
 import { Link } from "react-router-dom";
-import { ADD_TO_CARD } from "../../../redux/slice/cardSlice";
+import { ADD_TO_CARD, CALCULATE_TOTAL_QUANTITY } from "../../../redux/slice/cardSlice";
 import { useDispatch } from "react-redux";
+import { shortenText } from "../../../utils/cutText";
 
 const ProductsItem = ({ grid, product, id, name, price, desc, imageURL }) => {
   const dispatch = useDispatch();
-  // РЕГУЛИРУЕМ ДЛИНУ ТЕКСТА
-  const shortenText = (text, n) => {
-    if (text.length > n) {
-      return text.substring(0, n) + "...";
-    } else {
-      return text;
-    }
-  };
+
   const addToCard = (product) => {
     dispatch(ADD_TO_CARD(product));
+    dispatch(CALCULATE_TOTAL_QUANTITY());
   };
+
   return (
     <Card className={grid ? classes.grid : classes.list}>
       <Link to={`/product-details/${id}`}>

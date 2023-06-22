@@ -31,8 +31,11 @@ const Header = () => {
   const dispatch = useDispatch();
   const cartTotalQuantity = useSelector(selectCardTotalQuantity);
   const [userName, setUserName] = React.useState("");
-
   const [showMenu, setShowMenu] = React.useState(false);
+
+  useEffect(() => {
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  }, []);
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
