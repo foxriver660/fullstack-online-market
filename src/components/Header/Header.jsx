@@ -1,56 +1,45 @@
 import React, { useEffect } from "react";
-import classes from "./Header.module.scss";
+import styles from "./Header.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
-
+import Basket from "../Basket/Basket";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
-import { useDispatch } from "react-redux/es/exports";
-import {
-  SET_ACTIVE_USER,
-  REMOVE_ACTIVE_USER,
-} from "../../redux/slice/authSlice";
+import { useDispatch, useSelector } from "react-redux/es/exports";
+import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { ShowOnLogin, ShowOnLogOut } from "../HiddenLinks/HiddenLinks";
-import AdminOnlyRoute, {
-  AdminOnlyLink,
-} from "../AdminOnlyRoute/AdminOnlyRoute";
+import AdminOnlyRoute, { AdminOnlyLink } from "../AdminOnlyRoute/AdminOnlyRoute";
+import { CALCULATE_TOTAL_QUANTITY, selectCardTotalQuantity } from "../../redux/slice/cardSlice";
 const logo = (
-  <div className={classes.logo}>
-    <Link className={classes.logoLink} to="/">
-      <h2 className={classes.logoTitle}>
+  <div className={styles.logo}>
+    <Link className={styles.logoLink} to="/">
+      <h2 className={styles.logoTitle}>
         e <span>Shop</span>.
       </h2>
     </Link>
   </div>
 );
 
-const cart = (
-  <span className={classes.cart}>
-    <Link className={classes.cartLink} to="/cart">
-      Корзина <BsCart4 size={16} />
-      <p>0</p>
-    </Link>
-  </span>
-);
-const activeLink = ({ isActive }) =>
-  isActive ? classes.active : classes.navLink;
+const activeLink = ({ isActive }) => (isActive ? styles.active : styles.navLink);
 
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-
+  const cartTotalQuantity = useSelector(selectCardTotalQuantity);
   const [userName, setUserName] = React.useState("");
-
   const [showMenu, setShowMenu] = React.useState(false);
+
+  useEffect(() => {
+    dispatch(CALCULATE_TOTAL_QUANTITY());
+  }, []);
+
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
       if (user) {
-        /*  const uid = user.uid; */
-        /*  console.log(user); */
         if (user.displayName === null) {
           const uName = user.email.split("@")[0];
           setUserName(uName);
@@ -90,24 +79,16 @@ const Header = () => {
   };
 
   return (
-    <header className={classes.header}>
-      <div className={classes.mainWrapper}>
+    <header className={styles.header}>
+      <div className={styles.mainWrapper}>
         {logo}
-        <nav
-          className={`${classes.nav} ${
-            showMenu ? classes.showNav : classes.hideNav
-          }`}
-        >
+        <nav className={`${styles.nav} ${showMenu ? styles.showNav : styles.hideNav}`}>
           <div
-            className={
-              showMenu
-                ? `${classes.navWrapper} ${classes.showNavWrapper}`
-                : classes.navWrapper
-            }
+            className={showMenu ? `${styles.navWrapper} ${styles.showNavWrapper}` : styles.navWrapper}
             onClick={hideMenu}
           ></div>
-          <ul onClick={hideMenu} className={classes.navList}>
-            <li className={`${classes.navItem} ${classes.logoMobile}`}>
+          <ul onClick={hideMenu} className={styles.navList}>
+            <li className={`${styles.navItem} ${styles.logoMobile}`}>
               {logo} <VscChromeClose onClick={hideMenu} size={30} />
             </li>
             <li>
@@ -117,20 +98,20 @@ const Header = () => {
                 </Link>
               </AdminOnlyLink>
             </li>
-            <li className={classes.navItem}>
+            <li className={styles.navItem}>
               <NavLink className={activeLink} to="/">
                 Главная страница
               </NavLink>
             </li>
 
-            <li className={classes.navItem}>
+            <li className={styles.navItem}>
               <NavLink className={activeLink} to="/contact">
                 Контакты
               </NavLink>
             </li>
           </ul>
-          <div className={classes.rigthNavBar} onClick={hideMenu}>
-            <span className={classes.links}>
+          <div className={styles.rigthNavBar} onClick={hideMenu}>
+            <span className={styles.links}>
               <ShowOnLogOut>
                 <NavLink className={activeLink} to="/login">
                   Войти
@@ -154,11 +135,11 @@ const Header = () => {
                 </NavLink>
               </ShowOnLogin>
             </span>
-            {cart}
+            <Basket />
           </div>
         </nav>
-        <div className={classes.menuIcon}>
-          {cart}
+        <div className={styles.menuIcon}>
+          <Basket />
           <GiHamburgerMenu size={30} onClick={toggleMenu} />
         </div>
       </div>

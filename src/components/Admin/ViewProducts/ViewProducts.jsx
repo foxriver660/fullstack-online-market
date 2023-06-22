@@ -5,7 +5,6 @@ import { db, storage } from "../../../firebase/config";
 import classes from "./ViewProducts.module.scss";
 import { FaEdit, FaTrashAlt } from "react-icons/fa";
 import { Link } from "react-router-dom";
-import Loader from "../../../components/Loader/Loader";
 import { deleteObject, ref } from "firebase/storage";
 import Notiflix from "notiflix";
 import { useDispatch, useSelector } from "react-redux";
@@ -59,7 +58,7 @@ const ViewProducts = () => {
 
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <div className={classes.container}>
         <h2>Все товары</h2>
 

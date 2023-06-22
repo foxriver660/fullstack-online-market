@@ -5,19 +5,21 @@ import { FaListAlt } from "react-icons/fa";
 import Search from "../../Search/Search";
 import ProductsItem from "../ProductsItem/ProductsItem";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  FILTER_BY_SEARCH,
-  SORT_PRODUCTS,
-  selectFilterProducts,
-} from "../../../redux/slice/filterSlice";
+import { FILTER_BY_SEARCH, SORT_PRODUCTS, selectFilterProducts } from "../../../redux/slice/filterSlice";
+import Pagination from "../../Pagination/Pagination";
 const ProductsList = ({ products }) => {
   const dispatch = useDispatch();
   const filteredList = useSelector(selectFilterProducts);
-console.log(filteredList);
 
   const [grid, setGrid] = useState(true);
   const [search, setSearch] = useState("");
   const [sort, setSort] = useState("latest");
+  // PAGINATION STATE
+  const [currentPage, setCurrentPage] = useState(1);
+  const [productsPerPage, setProductsPerPage] = useState(2);
+  const indexOfLastProduct = currentPage * productsPerPage;
+  const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
+  const currentProducts = filteredList.slice(indexOfFirstProduct, indexOfLastProduct);
 
   useEffect(() => {
     dispatch(FILTER_BY_SEARCH({ products, search }));
@@ -51,7 +53,6 @@ console.log(filteredList);
             <option value="latest">Новинки</option>
             <option value="lowest-price">Низкая цена</option>
             <option value="highest-price">Высокая цена</option>
-         
           </select>
         </div>
       </div>
@@ -59,7 +60,7 @@ console.log(filteredList);
         {filteredList.length === 0 ? (
           <p>Товары не найдены</p>
         ) : (
-          filteredList.map((product) => {
+          currentProducts.map((product) => {
             return (
               <div key={product.id}>
                 <ProductsItem {...product} grid={grid} product={product} />
@@ -68,6 +69,12 @@ console.log(filteredList);
           })
         )}
       </div>
+      <Pagination
+        productsPerPage={productsPerPage}
+        currentPage={currentPage}
+        setCurrentPage={setCurrentPage}
+        totalProducts={filteredList.length}
+      />
     </div>
   );
 };

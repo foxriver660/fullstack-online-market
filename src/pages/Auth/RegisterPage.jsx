@@ -7,7 +7,7 @@ import { Card } from "../../components/index";
 import registerImg from "../../images/man-hold-registration-clipboard-checklist-man-hold-hand-clipboard-agreement-flat-design-vector-illustration-background-112434342.jpg";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import Loader from "../../components/Loader/Loader";
+
 
 const RegisterPage = () => {
   const [email, setEmail] = React.useState("");
@@ -41,7 +41,7 @@ const RegisterPage = () => {
   return (
     <>
       
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <section className={`container ${classes.auth}`}>
         <Card>
           <div className={classes.form}>

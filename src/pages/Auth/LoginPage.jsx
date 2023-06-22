@@ -12,7 +12,7 @@ import {
 import { auth } from "../../firebase/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import Loader from "../../components/Loader/Loader";
+
 const LoginPage = () => {
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
@@ -49,7 +49,7 @@ const LoginPage = () => {
   };
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
       <section className={`container ${classes.auth}`}>
         <div className={classes.img}>
           <img src={loginImg} alt="login" width="200px" />

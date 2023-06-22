@@ -4,8 +4,7 @@ import Slider from "../../components/Slider/Slider";
 import classes from "./HomePage.module.scss";
 const HomePage = () => {
   const url = window.location.href;
-  console.log(url);
-/*   const scrollToProduct = () => {
+  /*   const scrollToProduct = () => {
     if (url.includes("product")) {
       window.scrollTo({
         top: 1300,

@@ -6,7 +6,7 @@ import resetImg from "../../images/man-hold-registration-clipboard-checklist-man
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
-import Loader from "../../components/Loader/Loader";
+
 
 const ResetPage = () => {
   const [email, setEmail] = React.useState("");
@@ -26,7 +26,7 @@ const ResetPage = () => {
   };
   return (
     <>
-      {isLoading && <Loader />}
+      {/* {isLoading && <Loader />} */}
     <section className={`container ${classes.auth}`}>
       <div className={classes.img}>
         <img src={resetImg} alt="register" width="200px" />
