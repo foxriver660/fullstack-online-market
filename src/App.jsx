@@ -13,6 +13,7 @@ import {
   ResetPage,
   BasketPage,
   CheckoutDetails,
+  Checkout,
 } from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -34,6 +35,7 @@ function App() {
           <Route path="/product-details/:id" element={<ProductsDetails />} />
           <Route path="/basket" element={<BasketPage />} />
           <Route path="/checkout-details" element={<CheckoutDetails />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route
             path="/admin/*"
             element={

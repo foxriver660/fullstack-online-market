@@ -7,3 +7,4 @@ export { default as ResetPage } from "./Auth/ResetPage";
 export { default as AdminPage } from "./AdminPage/AdminPage";
 export { default as BasketPage } from "./BasketPage/BasketPage";
 export { default as CheckoutDetails } from "./CheckoutPage/CheckoutDetails";
+export { default as Checkout } from "./CheckoutPage/Checkout";
