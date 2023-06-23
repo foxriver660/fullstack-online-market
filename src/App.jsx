@@ -3,7 +3,17 @@ import "./App.scss";
 // COMPONENTS
 import { Header, Footer } from "./components/index";
 // PAGES
-import { HomePage, ContactPage, AdminPage, OrderPage, LoginPage, RegisterPage, ResetPage, BasketPage } from "./pages";
+import {
+  HomePage,
+  ContactPage,
+  AdminPage,
+  OrderPage,
+  LoginPage,
+  RegisterPage,
+  ResetPage,
+  BasketPage,
+  CheckoutDetails,
+} from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminOnlyRoute from "./components/AdminOnlyRoute/AdminOnlyRoute";
@@ -23,6 +33,7 @@ function App() {
           <Route path="/reset" element={<ResetPage />} />
           <Route path="/product-details/:id" element={<ProductsDetails />} />
           <Route path="/basket" element={<BasketPage />} />
+          <Route path="/checkout-details" element={<CheckoutDetails />} />
           <Route
             path="/admin/*"
             element={

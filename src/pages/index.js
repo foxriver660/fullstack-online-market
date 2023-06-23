@@ -6,3 +6,4 @@ export { default as RegisterPage } from "./Auth/RegisterPage";
 export { default as ResetPage } from "./Auth/ResetPage";
 export { default as AdminPage } from "./AdminPage/AdminPage";
 export { default as BasketPage } from "./BasketPage/BasketPage";
+export { default as CheckoutDetails } from "./CheckoutPage/CheckoutDetails";
