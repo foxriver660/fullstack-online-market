@@ -4,14 +4,30 @@ import styles from "./CheckoutForm.module.scss";
 import Card from "../Card/Card";
 import CheckoutSummary from "../checkoutSummary/checkoutSummary";
 import { toast } from "react-toastify";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { selectEmail, selectUserId } from "../../redux/slice/authSlice";
+import { CLEAR_CARD, selectCardItems, selectCardTotalAmount } from "../../redux/slice/cardSlice";
+import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
+import { addDoc, collection, Timestamp } from "firebase/firestore";
+import { db } from "../../firebase/config";
 
 const CheckoutForm = () => {
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
   const stripe = useStripe();
   const elements = useElements();
 
   const [email, setEmail] = useState("");
   const [message, setMessage] = useState(null);
   const [isLoading, setIsLoading] = useState(false);
+
+  const userID = useSelector(selectUserId);
+  const userEmail = useSelector(selectEmail);
+  const cartItems = useSelector(selectCardItems);
+  const cartTotalAmount = useSelector(selectCardTotalAmount);
+  const shippingAddress = useSelector(selectShippingAddress);
 
   useEffect(() => {
     if (!stripe) {
@@ -27,7 +43,28 @@ const CheckoutForm = () => {
 
   // Save order to Order History
   const saveOrder = () => {
-    /*  */
+    const today = new Date();
+    const date = today.toDateString();
+    const time = today.toLocaleTimeString();
+    const orderConfig = {
+      userID,
+      userEmail,
+      orderDate: date,
+      orderTime: time,
+      orderAmount: cartTotalAmount,
+      orderStatus: "Order Placed...",
+      cartItems,
+      shippingAddress,
+      createdAt: Timestamp.now().toDate(),
+    };
+    try {
+      addDoc(collection(db, "orders"), orderConfig);
+      dispatch(CLEAR_CARD());
+      toast.success("Ордер сохранен");
+      navigate("/checkout-success");
+    } catch (error) {
+      toast.error(error.message);
+    }
   };
 
   const handleSubmit = async (e) => {
