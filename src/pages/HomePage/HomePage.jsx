@@ -4,20 +4,22 @@ import Slider from "../../components/Slider/Slider";
 import classes from "./HomePage.module.scss";
 const HomePage = () => {
   const url = window.location.href;
-  /*   const scrollToProduct = () => {
-    if (url.includes("product")) {
-      window.scrollTo({
-        top: 1300,
-        behavior: "smooth",
-      });
-    }
-  }; 
   useEffect(() => {
-    scrollToProduct();
-  }, []); */
+    const scrollToProducts = () => {
+      if (url.includes("#products")) {
+        window.scrollTo({
+          top: 700,
+          behavior: "smooth",
+        });
+        return;
+      }
+    };
+    scrollToProducts();
+  }, [url]);
+
   return (
     <section>
-      {/* <Slider /> */}
+      <Slider />
       <Products />
     </section>
   );

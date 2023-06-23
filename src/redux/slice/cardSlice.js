@@ -5,6 +5,7 @@ const initialState = {
   cardItems: localStorage.getItem("cardItems") ? JSON.parse(localStorage.getItem("cardItems")) : [],
   cardTotalQuantity: 0,
   cardTotalAmount: 0,
+  previousURL: "",
 };
 
 const cardSlice = createSlice({

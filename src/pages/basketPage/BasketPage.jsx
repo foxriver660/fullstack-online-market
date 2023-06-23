@@ -16,13 +16,14 @@ import {
 import { FaTrashAlt } from "react-icons/fa";
 import Card from "../../components/card/Card";
 import styles from "./BasketPage.module.scss";
+import { selectIsLoggedIn } from "../../redux/slice/authSlice";
 
 const BasketPage = () => {
   const cartItems = useSelector(selectCardItems);
   const cartTotalAmount = useSelector(selectCardTotalAmount);
   const cartTotalQuantity = useSelector(selectCardTotalQuantity);
   const dispatch = useDispatch();
-  /* const isLoggedIn = useSelector(selectIsLoggedIn); */
+  const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const navigate = useNavigate();
 

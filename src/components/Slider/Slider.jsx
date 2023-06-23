@@ -9,8 +9,9 @@ const Slider = () => {
   const slideLength = sliderData.length - 1;
 
   // AUTO SLIDE
-  const autoScroll = false;
+  const autoScroll = true;
   let interval = 6000;
+
   useEffect(() => {
     if (autoScroll) {
       setInterval(nextSlide, interval);
@@ -19,14 +20,10 @@ const Slider = () => {
   }, []);
 
   const nextSlide = () => {
-    setActiveSlide((prevActiveSlide) =>
-      prevActiveSlide === slideLength ? 0 : prevActiveSlide + 1
-    );
+    setActiveSlide((prevActiveSlide) => (prevActiveSlide === slideLength ? 0 : prevActiveSlide + 1));
   };
   const prevSlide = () => {
-    setActiveSlide((prevActiveSlide) =>
-      prevActiveSlide === 0 ? slideLength : prevActiveSlide - 1
-    );
+    setActiveSlide((prevActiveSlide) => (prevActiveSlide === 0 ? slideLength : prevActiveSlide - 1));
   };
 
   return (
@@ -35,10 +32,7 @@ const Slider = () => {
       <AiOutlineArrowRight className="arrow next" onClick={nextSlide} />
       {sliderData.map((slide, index) => {
         return (
-          <div
-            className={index === activeSlide ? "slide active" : "slide"}
-            key={index}
-          >
+          <div className={index === activeSlide ? "slide active" : "slide"} key={index}>
             {index === activeSlide && (
               <>
                 <img className="slide_image" src={slide.image} alt={slide.heading} />

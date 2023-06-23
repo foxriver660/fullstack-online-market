@@ -4,20 +4,30 @@ import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Card } from "../../components/index";
 import loginImg from "../../images/kisspng-offer-and-acceptance-contract-of-sale-proposal-zak-inventory-management-software-5b1e5574946513.3219275815287146126079.jpg";
-import {
-  GoogleAuthProvider,
-  signInWithEmailAndPassword,
-  signInWithPopup,
-} from "firebase/auth";
+import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { useSelector } from "react-redux";
+import { selectPreviousURL } from "../../redux/slice/cardSlice";
 
 const LoginPage = () => {
+  const navigate = useNavigate();
+
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
   const [isLoading, setIsLoading] = React.useState(false);
-  const navigate = useNavigate();
+
+  const url = useSelector(selectPreviousURL);
+
+  // Redirect user
+  const redirect = () => {
+    if (url.includes("basket")) {
+      return navigate("/basket");
+    }
+    navigate("/");
+  };
+  // Login
   const loginUser = (e) => {
     e.preventDefault();
     setIsLoading(true);
@@ -27,12 +37,14 @@ const LoginPage = () => {
         /* const user = userCredential.user; */
         setIsLoading(false);
         toast.success(`Вы вошли!`);
+        redirect();
       })
       .catch((error) => {
         toast.error(error.message);
         setIsLoading(false);
       });
   };
+
   // Google Login
   const provider = new GoogleAuthProvider();
   const signInWithGoogle = (e) => {
@@ -40,13 +52,13 @@ const LoginPage = () => {
       .then((result) => {
         /* const user = result.user; */
         toast.success(`Вы вошли!`);
-        navigate("/");
-        
+        redirect();
       })
       .catch((error) => {
         toast.error(error.message);
       });
   };
+
   return (
     <>
       {/* {isLoading && <Loader />} */}
@@ -79,11 +91,7 @@ const LoginPage = () => {
                 Забыли пароль?<Link to="/reset">Восстановить пароль</Link>
               </span>
             </form>
-            <button
-              className="--btn --btn-google --btn-block"
-              type="submit"
-              onClick={signInWithGoogle}
-            >
+            <button className="--btn --btn-google --btn-block" type="submit" onClick={signInWithGoogle}>
               <FcGoogle /> Login with Google
             </button>
             <span className={classes.register}>
