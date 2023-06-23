@@ -3,6 +3,7 @@ import { CountryDropdown } from "react-country-region-selector";
 import { useDispatch } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { Card } from "../../components";
+import CheckoutSummary from "../../components/checkoutSummary/checkoutSummary";
 import { SAVE_BILLING_ADDRESS, SAVE_SHIPPING_ADDRESS } from "../../redux/slice/checkoutSlice";
 import styles from "./CheckoutDetails.module.scss";
 
@@ -221,7 +222,9 @@ const CheckoutDetails = () => {
             </Card>
           </div>
           <div>
-            <Card cardClass={styles.card}></Card>
+            <Card cardClass={styles.card}>
+              <CheckoutSummary />
+            </Card>
           </div>
         </form>
       </div>
