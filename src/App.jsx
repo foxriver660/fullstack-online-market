@@ -19,6 +19,7 @@ import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import AdminOnlyRoute from "./components/AdminOnlyRoute/AdminOnlyRoute";
 import ProductsDetails from "./components/Products/ProductsDetail/ProductsDetails";
+import CheckoutSuccess from "./pages/CheckoutPage/CheckoutSuccess";
 
 function App() {
   return (
@@ -36,6 +37,7 @@ function App() {
           <Route path="/basket" element={<BasketPage />} />
           <Route path="/checkout-details" element={<CheckoutDetails />} />
           <Route path="/checkout" element={<Checkout />} />
+          <Route path="/checkout-success" element={<CheckoutSuccess />} />
           <Route
             path="/admin/*"
             element={
