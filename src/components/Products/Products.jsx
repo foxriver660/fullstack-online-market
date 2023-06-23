@@ -4,11 +4,7 @@ import ProductsFilter from "./ProductsFilter/ProductsFilter";
 import ProductsList from "./ProductsList/ProductsList";
 import useFetchCollection from "../../hook/useFetchCollection";
 import { useDispatch, useSelector } from "react-redux";
-import {
-  GET_PRICE_RANGE,
-  selectProduct,
-  STORE_PRODUCTS,
-} from "../../redux/slice/productSlice";
+import { GET_PRICE_RANGE, selectProduct, STORE_PRODUCTS } from "../../redux/slice/productSlice";
 import { FaCogs } from "react-icons/fa";
 const Products = () => {
   const dispatch = useDispatch();
@@ -22,14 +18,14 @@ const Products = () => {
   }, [dispatch, data]);
 
   return (
-    <section>
+    <section id="products">
       <div className={`container ${classes.product}`}>
-        <aside className={showFilter ? `${classes.show} ${classes.filter}` : classes.filter }>
+        <aside className={showFilter ? `${classes.show} ${classes.filter}` : classes.filter}>
           <ProductsFilter />
         </aside>
         <div className={classes.content}>
           <ProductsList products={products} />
-          <div className={classes.icon} onClick={()=>setShowFilter(!showFilter)}>
+          <div className={classes.icon} onClick={() => setShowFilter(!showFilter)}>
             <FaCogs size={20} />
             <p>
               <b>{showFilter ? "Скрыть фильтры" : "Показать фильтры"}</b>

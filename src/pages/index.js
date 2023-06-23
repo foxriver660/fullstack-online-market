@@ -5,4 +5,4 @@ export { default as LoginPage } from "./Auth/LoginPage";
 export { default as RegisterPage } from "./Auth/RegisterPage";
 export { default as ResetPage } from "./Auth/ResetPage";
 export { default as AdminPage } from "./AdminPage/AdminPage";
-export { default as BasketPage } from "./basketPage/BasketPage";
+export { default as BasketPage } from "./BasketPage/BasketPage";

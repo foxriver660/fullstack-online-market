@@ -14,7 +14,7 @@ import {
   selectCardTotalQuantity,
 } from "../../redux/slice/cardSlice";
 import { FaTrashAlt } from "react-icons/fa";
-import Card from "../../components/card/Card";
+import Card from "../../components/Card/Card";
 import styles from "./BasketPage.module.scss";
 import { selectIsLoggedIn } from "../../redux/slice/authSlice";
 
