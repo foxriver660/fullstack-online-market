@@ -5,6 +5,7 @@ import { selectUserId } from "../../redux/slice/authSlice";
 import { selectOrderHistory, STORE_ORDERS } from "../../redux/slice/orderSlice";
 import styles from "./OrderHistoryPage.module.scss";
 import { useNavigate } from "react-router-dom";
+
 const OrderHistoryPage = () => {
   const { data, isLoading } = useFetchCollection("orders");
 
@@ -33,7 +34,7 @@ const OrderHistoryPage = () => {
         <>
           <div className={styles.table}>
             {filteredOrders.length === 0 ? (
-              <p>No order found</p>
+              <p>Заказы не найдены</p>
             ) : (
               <table>
                 <thead>

@@ -6,6 +6,8 @@ import { db } from "../../../firebase/config";
 import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { ADD_TO_CARD, CALCULATE_TOTAL_QUANTITY, DECREASE_CARD, selectCardItems } from "../../../redux/slice/cardSlice";
+import useFetchDocument from "../../../hook/useFetchDocument";
+
 const ProductsDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
@@ -16,16 +18,9 @@ const ProductsDetails = () => {
   const isBasketAdded = basketItems.findIndex((card) => {
     return card.id === id;
   });
-  const getProduct = async () => {
-    const docRef = doc(db, "products", id);
-    const docSnap = await getDoc(docRef);
 
-    if (docSnap.exists()) {
-      setProduct({ ...docSnap.data(), id: id });
-    } else {
-      toast.error("Продукт не найден");
-    }
-  };
+  const { document } = useFetchDocument("products", id);
+
   const addToBasket = (product) => {
     dispatch(ADD_TO_CARD(product));
     dispatch(CALCULATE_TOTAL_QUANTITY());
@@ -35,13 +30,13 @@ const ProductsDetails = () => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
   };
   useEffect(() => {
-    getProduct();
-  }, [id]);
+    setProduct(document);
+  }, [document]);
 
   const goBack = () => {
     navigate("/#product");
   };
-  console.log(isBasketAdded);
+
   return (
     <section>
       <div className={`container ${classes.product}`}>
