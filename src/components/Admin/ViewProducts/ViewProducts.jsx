@@ -22,7 +22,6 @@ const ViewProducts = () => {
     dispatch(STORE_PRODUCTS(data));
   }, [dispatch, data]);
 
-  // !NOTIFLIX
   const confirmDelete = (id, image) => {
     Notiflix.Confirm.show(
       "Удалить продукт?",
@@ -81,11 +80,7 @@ const ViewProducts = () => {
                 <tr key={product.id}>
                   <td>{index + 1}</td>
                   <td>
-                    <img
-                      className={classes.img}
-                      src={product.imageURL}
-                      alt=""
-                    />
+                    <img className={classes.img} src={product.imageURL} alt="" />
                   </td>
                   <td>{product.name}</td>
                   <td>{product.category}</td>
@@ -95,13 +90,7 @@ const ViewProducts = () => {
                       <FaEdit size={20} color="green" />
                     </Link>
                     &nbsp;
-                    <FaTrashAlt
-                      size={20}
-                      color="red"
-                      onClick={() =>
-                        confirmDelete(product.id, product.imageURL)
-                      }
-                    />
+                    <FaTrashAlt size={20} color="red" onClick={() => confirmDelete(product.id, product.imageURL)} />
                   </td>
                 </tr>
               ))}
