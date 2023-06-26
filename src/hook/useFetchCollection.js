@@ -25,7 +25,6 @@ const useFetchCollection = (collectionName) => {
         }));
 
         setData(allData);
-        console.log("DONE", allData);
         setIsLoading(false);
       });
     } catch (error) {
