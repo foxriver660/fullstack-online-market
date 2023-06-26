@@ -1,17 +1,12 @@
 import React from "react";
-import classes from "./Search.module.scss";
+import styles from "./Search.module.scss";
 import { BiSearch } from "react-icons/bi";
 
 const Search = ({ value, onChange }) => {
   return (
-    <div className={classes.search}>
-      <BiSearch size={18} className={classes.icon} />
-      <input
-        type="text"
-        placeholder="Поиск"
-        value={value}
-        onChange={onChange}
-      />
+    <div className={styles.search}>
+      <BiSearch size={18} className={styles.icon} />
+      <input type="text" placeholder="Поиск" value={value} onChange={onChange} />
     </div>
   );
 };

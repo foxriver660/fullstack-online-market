@@ -1,12 +1,10 @@
 import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 import classes from "./ProductsList.module.scss";
 import { BsFillGridFill } from "react-icons/bs";
 import { FaListAlt } from "react-icons/fa";
-import Search from "../../Search/Search";
-import ProductsItem from "../ProductsItem/ProductsItem";
-import { useDispatch, useSelector } from "react-redux";
 import { FILTER_BY_SEARCH, SORT_PRODUCTS, selectFilterProducts } from "../../../redux/slice/filterSlice";
-import Pagination from "../../Pagination/Pagination";
+import { Search, ProductsItem, Pagination } from "../../index";
 const ProductsList = ({ products }) => {
   const dispatch = useDispatch();
   const filteredList = useSelector(selectFilterProducts);
