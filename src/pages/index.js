@@ -10,3 +10,4 @@ export { default as CheckoutDetails } from "./CheckoutPage/CheckoutDetails";
 export { default as Checkout } from "./CheckoutPage/Checkout";
 export { default as OrderHistoryPage } from "./OrderHistoryPage/OrderHistoryPage";
 export { default as OrderDetailsPage } from "./OrderDetailsPage/OrderDetailsPage";
+export { default as ReviewProductsPage } from "./ReviewProductsPage/ReviewProductsPage";
