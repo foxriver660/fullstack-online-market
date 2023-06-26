@@ -1,6 +1,6 @@
 export { default as HomePage } from "./HomePage/HomePage";
 export { default as ContactPage } from "./ContactPage/ContactPage";
-export { default as OrderPage } from "./OrderPage/OrderPage";
+export { default as OrderPage } from "./OrderHistoryPage/OrderHistoryPage";
 export { default as LoginPage } from "./Auth/LoginPage";
 export { default as RegisterPage } from "./Auth/RegisterPage";
 export { default as ResetPage } from "./Auth/ResetPage";
@@ -8,3 +8,6 @@ export { default as AdminPage } from "./AdminPage/AdminPage";
 export { default as BasketPage } from "./BasketPage/BasketPage";
 export { default as CheckoutDetails } from "./CheckoutPage/CheckoutDetails";
 export { default as Checkout } from "./CheckoutPage/Checkout";
+export { default as OrderHistoryPage } from "./OrderHistoryPage/OrderHistoryPage";
+export { default as OrderDetailsPage } from "./OrderDetailsPage/OrderDetailsPage";
+export { default as ReviewProductsPage } from "./ReviewProductsPage/ReviewProductsPage";
