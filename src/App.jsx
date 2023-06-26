@@ -16,6 +16,7 @@ import {
   OrderHistoryPage,
   OrderDetailsPage,
   ReviewProductsPage,
+  NotFoundPage,
 } from "./pages";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
@@ -43,6 +44,7 @@ function App() {
           <Route path="/order-history" element={<OrderHistoryPage />} />
           <Route path="/order-details/:id" element={<OrderDetailsPage />} />
           <Route path="/review-product/:id" element={<ReviewProductsPage />} />
+          <Route path="*" element={<NotFoundPage />} />
           <Route
             path="/admin/*"
             element={
