@@ -1,22 +1,20 @@
-import React from "react";
+import React, { useState } from "react";
 import classes from "./Auth.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { FcGoogle } from "react-icons/fc";
 import { Card } from "../../components/index";
-import loginImg from "../../images/kisspng-offer-and-acceptance-contract-of-sale-proposal-zak-inventory-management-software-5b1e5574946513.3219275815287146126079.jpg";
 import { GoogleAuthProvider, signInWithEmailAndPassword, signInWithPopup } from "firebase/auth";
 import { auth } from "../../firebase/config";
-import { ToastContainer, toast } from "react-toastify";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import { useSelector } from "react-redux";
-import { selectPreviousURL } from "../../redux/slice/cardSlice";
+import { selectPreviousURL } from "../../redux/slice/basketSlice";
 
 const LoginPage = () => {
   const navigate = useNavigate();
 
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
 
   const url = useSelector(selectPreviousURL);
 
@@ -34,14 +32,11 @@ const LoginPage = () => {
 
     signInWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
-        /* const user = userCredential.user; */
-        setIsLoading(false);
         toast.success(`Вы вошли!`);
         redirect();
       })
       .catch((error) => {
         toast.error(error.message);
-        setIsLoading(false);
       });
   };
 
@@ -61,11 +56,7 @@ const LoginPage = () => {
 
   return (
     <>
-      {/* {isLoading && <Loader />} */}
       <section className={`container ${classes.auth}`}>
-        <div className={classes.img}>
-          <img src={loginImg} alt="login" width="200px" />
-        </div>
         <Card>
           <div className={classes.form}>
             <h2 className={classes.title}>Войти в личный кабинет</h2>

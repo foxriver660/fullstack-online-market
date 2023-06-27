@@ -69,21 +69,13 @@ const CheckoutDetails = () => {
                 value={shippingAddress.name}
                 onChange={(e) => handleShipping(e)}
               />
-              <label>Адрес 1</label>
+              <label>Адрес</label>
               <input
                 type="text"
-                placeholder="Адрес 1"
+                placeholder="Адрес"
                 required
                 name="line1"
                 value={shippingAddress.line1}
-                onChange={(e) => handleShipping(e)}
-              />
-              <label>Адрес 2</label>
-              <input
-                type="text"
-                placeholder="Адрес 2"
-                name="line2"
-                value={shippingAddress.line2}
                 onChange={(e) => handleShipping(e)}
               />
               <label>Город</label>
@@ -149,23 +141,16 @@ const CheckoutDetails = () => {
                 value={billingAddress.name}
                 onChange={(e) => handleBilling(e)}
               />
-              <label>Адрес 1</label>
+              <label>Адрес</label>
               <input
                 type="text"
-                placeholder="Адрес 1"
+                placeholder="Адрес"
                 required
                 name="line1"
                 value={billingAddress.line1}
                 onChange={(e) => handleBilling(e)}
               />
-              <label>Адрес 2</label>
-              <input
-                type="text"
-                placeholder="Адрес  2"
-                name="line2"
-                value={billingAddress.line2}
-                onChange={(e) => handleBilling(e)}
-              />
+
               <label>Город</label>
               <input
                 type="text"

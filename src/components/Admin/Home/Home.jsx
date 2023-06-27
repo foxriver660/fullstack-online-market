@@ -23,7 +23,7 @@ const Home = () => {
   const products = useSelector(selectProduct);
   const orders = useSelector(selectOrderHistory);
   const totalOrderAmount = useSelector(selectTotalOrderAmount);
-  console.log(products);
+
   const fbProducts = useFetchCollection("products");
   const { data } = useFetchCollection("orders");
 
@@ -42,19 +42,19 @@ const Home = () => {
       <div className={styles["info-box"]}>
         <InfoBox
           cardClass={`${styles.card} ${styles.card1}`}
-          title={"Earnings"}
-          count={`$${totalOrderAmount}`}
+          title={"Доход"}
+          count={`${totalOrderAmount}₽`}
           icon={earningIcon}
         />
         <InfoBox
           cardClass={`${styles.card} ${styles.card2}`}
-          title={"Products"}
+          title={"Товары"}
           count={products.length}
           icon={productIcon}
         />
         <InfoBox
           cardClass={`${styles.card} ${styles.card3}`}
-          title={"Orders"}
+          title={"Заказы"}
           count={orders.length}
           icon={ordersIcon}
         />

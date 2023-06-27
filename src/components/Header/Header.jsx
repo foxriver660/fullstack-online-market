@@ -91,7 +91,7 @@ const Header = () => {
             </li>
             <li>
               <AdminOnlyLink>
-                <Link to="/admin" className="--btn --btn-primary">
+                <Link to="/admin" className="--btn --btn-admin">
                   admin
                 </Link>
               </AdminOnlyLink>
@@ -136,10 +136,10 @@ const Header = () => {
             <Basket />
           </div>
         </nav>
-        <div className={styles.menuIcon}>
+        <NavLink className={styles.menuIcon}>
           <Basket />
           <GiHamburgerMenu size={30} onClick={toggleMenu} />
-        </div>
+        </NavLink>
       </div>
     </header>
   );

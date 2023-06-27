@@ -1,16 +1,16 @@
 import React from "react";
 import { NavBar, Home, Orders, AddProducts, ViewProducts } from "../../components";
-import classes from "./AdminPage.module.scss";
+import styles from "./AdminPage.module.scss";
 import { Routes, Route } from "react-router-dom";
 import OrderDetails from "../../components/Admin/OrderDetails/OrderDetails";
 
 const AdminPage = () => {
   return (
-    <div className={classes.admin}>
-      <div className={classes.navbar}>
+    <div className={styles.admin}>
+      <div className={styles.navbar}>
         <NavBar />
       </div>
-      <div className={classes.content}>
+      <div className={styles.content}>
         <Routes>
           <Route path="home" element={<Home />} />
           <Route path="viewproducts" element={<ViewProducts />} />

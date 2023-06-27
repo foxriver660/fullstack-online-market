@@ -1,5 +1,5 @@
 import React, { useRef } from "react";
-import { FaEnvelope, FaPhoneAlt, FaTwitter } from "react-icons/fa";
+import { FaEnvelope, FaPhoneAlt, FaTelegram } from "react-icons/fa";
 import { GoLocation } from "react-icons/go";
 import { toast } from "react-toastify";
 import Card from "../../components/Card/Card";
@@ -39,12 +39,12 @@ const ContactPage = () => {
               <input type="text" name="subject" placeholder="Тема" required />
               <label>Текст обращения</label>
               <textarea name="message" cols="30" rows="10"></textarea>
-              <button className="--btn --btn-primary">Отправить сообщение</button>
+              <button className="--btn --btn-submit">Отправить сообщение</button>
             </Card>
           </form>
 
           <div className={styles.details}>
-            <Card cardClass={styles.card2}>
+            <Card className={styles.cardContact}>
               <h3>Контактная информация</h3>
               <p>Заполните форму или свяжитесь по следующим контактам:</p>
               <div className={styles.icons}>
@@ -61,7 +61,7 @@ const ContactPage = () => {
                   <p>Россия</p>
                 </span>
                 <span>
-                  <FaTwitter />
+                  <FaTelegram />
                   <p>@foxriver660</p>
                 </span>
               </div>

@@ -2,17 +2,17 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  ADD_TO_CARD,
+  ADD_TO_BASKET,
+  DECREASE_BASKET,
+  REMOVE_FROM_BASKET,
+  CLEAR_BASKET,
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_QUANTITY,
-  CLEAR_CARD,
-  DECREASE_CARD,
-  REMOVE_FROM_CARD,
   SAVE_URL,
-  selectCardItems,
-  selectCardTotalAmount,
-  selectCardTotalQuantity,
-} from "../../redux/slice/cardSlice";
+  selectBasketItems,
+  selectBasketTotalAmount,
+  selectBasketTotalQuantity,
+} from "../../redux/slice/basketSlice";
 import { FaTrashAlt } from "react-icons/fa";
 import Card from "../../components/card/Card";
 import styles from "./BasketPage.module.scss";
@@ -22,25 +22,25 @@ const BasketPage = () => {
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
-  const basketItems = useSelector(selectCardItems);
-  const basketTotalAmount = useSelector(selectCardTotalAmount);
-  const basketTotalQuantity = useSelector(selectCardTotalQuantity);
+  const basketItems = useSelector(selectBasketItems);
+  const basketTotalAmount = useSelector(selectBasketTotalAmount);
+  const basketTotalQuantity = useSelector(selectBasketTotalQuantity);
   const isLoggedIn = useSelector(selectIsLoggedIn);
 
   const increaseItem = (item) => {
-    dispatch(ADD_TO_CARD(item));
+    dispatch(ADD_TO_BASKET(item));
   };
 
   const decreaseItem = (item) => {
-    dispatch(DECREASE_CARD(item));
+    dispatch(DECREASE_BASKET(item));
   };
 
   const removeFromBasket = (item) => {
-    dispatch(REMOVE_FROM_CARD(item));
+    dispatch(REMOVE_FROM_BASKET(item));
   };
 
   const clearBasket = () => {
-    dispatch(CLEAR_CARD());
+    dispatch(CLEAR_BASKET());
   };
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const BasketPage = () => {
       navigate("/login");
     }
   };
-  console.log(basketItems);
+
   return (
     <section>
       <div className={`container ${styles.table}`}>
@@ -87,7 +87,7 @@ const BasketPage = () => {
               </thead>
               <tbody>
                 {basketItems.map((item, index) => {
-                  const { id, name, price, imageURL, cardQuantity } = item;
+                  const { id, name, price, imageURL, basketQuantity } = item;
                   return (
                     <tr key={id}>
                       <td>{index + 1}</td>
@@ -104,14 +104,14 @@ const BasketPage = () => {
                             -
                           </button>
                           <p>
-                            <b>{cardQuantity}</b>
+                            <b>{basketQuantity}</b>
                           </p>
                           <button className="--btn" onClick={() => increaseItem(item)}>
                             +
                           </button>
                         </div>
                       </td>
-                      <td>{(price * cardQuantity).toFixed(2)}</td>
+                      <td>{(price * basketQuantity).toFixed(2)}</td>
                       <td className={styles.icons}>
                         <FaTrashAlt size={19} color="red" onClick={() => removeFromBasket(item)} />
                       </td>
@@ -121,7 +121,7 @@ const BasketPage = () => {
               </tbody>
             </table>
             <div className={styles.summary}>
-              <button className="--btn --btn-danger" onClick={clearBasket}>
+              <button className="--btn --btn-primary" onClick={clearBasket}>
                 Очистить корзину
               </button>
               <div className={styles.checkout}>
@@ -137,7 +137,7 @@ const BasketPage = () => {
                     <h4>Всего на:</h4>
                     <h3>{`${basketTotalAmount.toFixed(2)}₽`}</h3>
                   </div>
-                  <button className="--btn --btn-filter --btn-block" onClick={checkout}>
+                  <button className="--btn --btn-submit --btn-block" onClick={checkout}>
                     Купить
                   </button>
                 </Card>

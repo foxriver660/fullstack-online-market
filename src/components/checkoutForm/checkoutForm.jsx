@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectEmail, selectUserId } from "../../redux/slice/authSlice";
-import { CLEAR_CARD, selectCardItems, selectCardTotalAmount } from "../../redux/slice/cardSlice";
+import { CLEAR_BASKET, selectBasketItems, selectBasketTotalAmount } from "../../redux/slice/basketSlice";
 import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../firebase/config";
@@ -25,8 +25,8 @@ const CheckoutForm = () => {
 
   const userID = useSelector(selectUserId);
   const userEmail = useSelector(selectEmail);
-  const cartItems = useSelector(selectCardItems);
-  const cartTotalAmount = useSelector(selectCardTotalAmount);
+  const basketItems = useSelector(selectBasketItems);
+  const basketTotalAmount = useSelector(selectBasketTotalAmount);
   const shippingAddress = useSelector(selectShippingAddress);
 
   useEffect(() => {
@@ -59,7 +59,7 @@ const CheckoutForm = () => {
     };
     try {
       addDoc(collection(db, "orders"), orderConfig);
-      dispatch(CLEAR_CARD());
+      dispatch(CLEAR_BASKET());
       toast.success("Ордер сохранен");
       navigate("/checkout-success");
     } catch (error) {
@@ -95,7 +95,7 @@ const CheckoutForm = () => {
         if (result.paymentIntent) {
           if (result.paymentIntent.status === "succeeded") {
             setIsLoading(false);
-            toast.success("Payment successful");
+            toast.success("Оплата прошла успешно");
             saveOrder();
           }
         }

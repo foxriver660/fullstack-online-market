@@ -3,7 +3,12 @@ import StarsRating from "react-star-rate";
 import styles from "./ProductsDetails.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CARD, CALCULATE_TOTAL_QUANTITY, DECREASE_CARD, selectCardItems } from "../../../redux/slice/cardSlice";
+import {
+  ADD_TO_BASKET,
+  CALCULATE_TOTAL_QUANTITY,
+  DECREASE_BASKET,
+  selectBasketItems,
+} from "../../../redux/slice/basketSlice";
 import useFetchDocument from "../../../hook/useFetchDocument";
 import useFetchCollection from "../../../hook/useFetchCollection";
 import { Card, Loader } from "../../index";
@@ -12,7 +17,7 @@ const ProductsDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
-  const basketItems = useSelector(selectCardItems);
+  const basketItems = useSelector(selectBasketItems);
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const basket = basketItems.find((card) => card.id === id);
@@ -26,11 +31,11 @@ const ProductsDetails = () => {
   const filteredReviews = data.filter((review) => review.productID === id);
 
   const addToBasket = (product) => {
-    dispatch(ADD_TO_CARD(product));
+    dispatch(ADD_TO_BASKET(product));
     dispatch(CALCULATE_TOTAL_QUANTITY());
   };
   const decreaseBasket = (product) => {
-    dispatch(DECREASE_CARD(product));
+    dispatch(DECREASE_BASKET(product));
     dispatch(CALCULATE_TOTAL_QUANTITY());
   };
   useEffect(() => {
@@ -84,7 +89,7 @@ const ProductsDetails = () => {
                     </>
                   )}
                 </div>
-                <button onClick={() => addToBasket(product)} className="--btn --btn-danger">
+                <button onClick={() => addToBasket(product)} className="--btn --btn-primary">
                   Добавить
                 </button>
               </div>

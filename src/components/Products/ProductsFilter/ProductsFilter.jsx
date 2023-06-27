@@ -69,7 +69,7 @@ const ProductsFilter = () => {
       <input value={price} type="range" min={minPrice} max={maxPrice} onChange={(e) => setPrice(e.target.value)} />
 
       <br />
-      <button className="--btn --btn-filter" onClick={clearFilters}>
+      <button className="--btn --btn-primary" onClick={clearFilters}>
         Очистить фильтр
       </button>
     </div>

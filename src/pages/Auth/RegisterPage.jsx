@@ -1,5 +1,5 @@
-import React from "react";
-import { ToastContainer, toast } from "react-toastify";
+import React, { useState } from "react";
+import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 import classes from "./Auth.module.scss";
 import { Link, useNavigate } from "react-router-dom";
@@ -8,40 +8,33 @@ import registerImg from "../../images/man-hold-registration-clipboard-checklist-
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
 
-
 const RegisterPage = () => {
-  const [email, setEmail] = React.useState("");
-  const [password, setPassword] = React.useState("");
-  const [confirmPassword, setConfirmPassword] = React.useState("");
-  const [isLoading, setIsLoading] = React.useState(false);
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+  const [confirmPassword, setConfirmPassword] = useState("");
 
   const navigate = useNavigate();
   const registerUser = (e) => {
     e.preventDefault();
-    console.log(email, password, confirmPassword);
+
     if (password !== confirmPassword) {
       toast.error("Пароли не совпадают");
     }
-    setIsLoading(true);
 
     createUserWithEmailAndPassword(auth, email, password)
       .then((userCredential) => {
         const user = userCredential.user;
-        console.log(user);
-        setIsLoading(false);
+
         toast.success("Регистрация прошла успешно");
         navigate("/login");
       })
       .catch((error) => {
         toast.error(error.message);
-        setIsLoading(false);
       });
   };
 
   return (
     <>
-      
-      {/* {isLoading && <Loader />} */}
       <section className={`container ${classes.auth}`}>
         <Card>
           <div className={classes.form}>
