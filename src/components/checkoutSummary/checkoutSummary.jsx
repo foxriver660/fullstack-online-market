@@ -24,13 +24,13 @@ const CheckoutSummary = () => {
         ) : (
           <div>
             <p>
-              <b>{`Cart item(s): ${cardTotalQuantity}`}</b>
+              <b>{`Товаров в корзине: ${cardTotalQuantity}`}</b>
             </p>
             <div className={styles.text}>
               <h4>Всего:</h4>
               <h3>{cardTotalAmount.toFixed(2)}₽</h3>
             </div>
-            {cardItems.map((item, index) => {
+            {cardItems.map((item) => {
               const { id, name, price, cardQuantity } = item;
               return (
                 <Card key={id} cardClass={styles.card}>

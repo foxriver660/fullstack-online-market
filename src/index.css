@@ -5,8 +5,10 @@
   --font-family: "Commissioner", sans-serif;
   /* АПРУВ */
   --color-razer: #47e10c;
+  --color-razer-ligth: #d1ebc6;
   --dark-razer: #050805;
   --color-primary: #da0d0d;
+  --color-border: #ccc;
   --color-white: #fff;
   --color-dark: #333;
   --color-grey: #eee;
@@ -47,6 +49,7 @@ section {
 }
 /* UTILITY CLASSES */
 .--btn {
+  font-family: var(--font-family);
   font-size: 1.6rem;
   font-weight: 400;
   padding: 6px 8px;
@@ -63,6 +66,11 @@ section {
   color: #fff;
   border: 1px dashed var(--color-razer);
 }
+.--btn-filter {
+  color: var(--color-dark);
+  border: 1px solid var(--color-dark);
+  background: var(--color-danger);
+}
 .--btn-block {
   width: 100%;
 }
@@ -72,8 +80,11 @@ section {
   outline: 2px solid var(--dark-razer);
 }
 .--btn-danger {
-  color: #fff;
-  background: var(--color-razer);
+  color: var(--color-dark);
+  background: var(--color-danger);
+  border-radius: 15px;
+  border: 1px solid var(--color-dark);
+  padding: 3px;
 }
 /* Flex */
 .--flex-center {

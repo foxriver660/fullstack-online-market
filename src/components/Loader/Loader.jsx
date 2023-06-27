@@ -1,15 +1,7 @@
-/* import ReactDOM from 'react-dom'
-import classes from './Loader.module.scss'
+import styles from "./Loader.module.scss";
 
-const Loader = () => {
-  return ReactDOM.createPortal (
-    <div className={classes.wrapper}>
-      <div className={classes.loader}>
-      
-        </div>
-    </div>,
-    document.getElementById('loader')
-  )
-}
+const Loader = ({ classname }) => {
+  return <div className={`${styles.loader} ${classname}`}></div>;
+};
 
-export default Loader */
+export default Loader;

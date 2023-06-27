@@ -57,7 +57,7 @@ const OrderHistoryPage = () => {
                         </td>
                         <td>{id}</td>
                         <td>
-                          {"$"}
+                          {"₽"}
                           {orderAmount}
                         </td>
                         <td>

@@ -15,7 +15,7 @@ const ContactPage = () => {
 
     emailjs.sendForm("service_tv8ii19", "template_c4fk6s7", form.current, "ZCe9RKv0dHXXZQpnh").then(
       (result) => {
-        toast.success("Сообщение усспешно отправлено");
+        toast.success("Сообщение успешно отправлено");
       },
       (error) => {
         toast.error(error.text);
@@ -46,7 +46,7 @@ const ContactPage = () => {
           <div className={styles.details}>
             <Card cardClass={styles.card2}>
               <h3>Контактная информация</h3>
-              <p>Fill the form or contact us via other channels listed below</p>
+              <p>Заполните форму или свяжитесь по следующим контактам:</p>
               <div className={styles.icons}>
                 <span>
                   <FaPhoneAlt />

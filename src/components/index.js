@@ -17,3 +17,4 @@ export { default as ProductsList } from "./Products/ProductsList/ProductsList";
 export { default as ProductsItem } from "./Products/ProductsItem/ProductsItem";
 
 export { default as Pagination } from "./Pagination/Pagination";
+export { default as Loader } from "./Loader/Loader";

@@ -7,8 +7,7 @@ const OrderDetailsPage = () => {
   const [order, setOrder] = useState();
   const { id } = useParams();
   const { document } = useFetchDocument("orders", id);
-  console.log(id);
-  console.log(order);
+
   useEffect(() => {
     setOrder(document);
   }, [document]);

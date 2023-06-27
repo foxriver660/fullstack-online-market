@@ -123,7 +123,7 @@ const CheckoutForm = () => {
                   {isLoading ? <div className={styles.spinner} id="spinner"></div> : "Pay now"}
                 </span>
               </button>
-              {/* Show any error or success messages */}
+
               {message && <div id={styles["payment-message"]}>{message}</div>}
             </Card>
           </div>
