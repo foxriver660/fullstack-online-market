@@ -12,9 +12,7 @@ import { selectEmail } from "../../redux/slice/authSlice";
 import { selectBillingAddress, selectShippingAddress } from "../../redux/slice/checkoutSlice";
 import { toast } from "react-toastify";
 import CheckoutForm from "../../components/checkoutForm/checkoutForm";
-const stripePromise = loadStripe(
-  "pk_test_51NM66TFAmsoQbm5g2ssPllrqBlAAZmk6MOQco9hkX6CEfFDBLtgyIL3Kg8AVsI2mTtpPPY2dj9YrBG1VVtVgghsY001cZe3REq"
-);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 const Checkout = () => {
   const dispatch = useDispatch();
