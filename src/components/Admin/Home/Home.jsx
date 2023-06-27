@@ -38,7 +38,7 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <h2>Admin Home</h2>
+      <h2>Страница администратора</h2>
       <div className={styles["info-box"]}>
         <InfoBox
           cardClass={`${styles.card} ${styles.card1}`}

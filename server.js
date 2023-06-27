@@ -13,10 +13,11 @@ app.get("/", (req, res) => {
 
 const array = [];
 const calculateOrderAmount = (items) => {
+  console.log(items);
   items.map((item) => {
-    const { price, cardQuantity } = item;
-    const cardItemAmount = price * cardQuantity;
-    return array.push(cardItemAmount);
+    const { price, basketQuantity } = item;
+    const basketItemAmount = price * basketQuantity;
+    return array.push(basketItemAmount);
   });
   const totalAmount = array.reduce((a, b) => {
     return a + b;
@@ -39,7 +40,6 @@ app.post("/create-payment-intent", async (req, res) => {
     shipping: {
       address: {
         line1: shipping.line1,
-        line2: shipping.line2,
         city: shipping.city,
         country: shipping.country,
         postal_code: shipping.postal_code,

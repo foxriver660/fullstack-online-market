@@ -69,15 +69,15 @@
     }
 
     span {
-      margin: 0 5px;
+      display: flex;
 
+      gap: 5px;
       p {
         color: #fff;
       }
     }
 
     .links .navLink {
-      margin: 0 5px;
       color: #fff;
       &.active {
         color: var(--color-razer);
@@ -92,6 +92,7 @@
   .logoMobile {
     display: none;
   }
+
   @media screen and (max-width: 800px) {
     .nav {
       display: block;

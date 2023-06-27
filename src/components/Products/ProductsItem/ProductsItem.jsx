@@ -18,7 +18,7 @@ const ProductsItem = ({ grid, product, id, name, price, desc, imageURL }) => {
     <Card className={grid ? styles.grid : styles.list}>
       <Link to={`/product-details/${id}`}>
         <div className={styles.img}>
-          <img className={styles.img} src={imageURL} alt={name} />
+          <img src={imageURL} alt={name} />
         </div>
       </Link>
       <div className={styles.content}>

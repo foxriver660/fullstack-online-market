@@ -51,9 +51,9 @@ const CheckoutForm = () => {
       userEmail,
       orderDate: date,
       orderTime: time,
-      orderAmount: cartTotalAmount,
+      orderAmount: basketTotalAmount,
       orderStatus: "Order Placed...",
-      cartItems,
+      basketItems,
       shippingAddress,
       createdAt: Timestamp.now().toDate(),
     };
@@ -107,20 +107,20 @@ const CheckoutForm = () => {
   return (
     <section>
       <div className={`container ${styles.checkout}`}>
-        <h2>Checkout</h2>
+        <h2>Оплата</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <Card cardClass={styles.card}>
+            <Card className={styles.card}>
               <CheckoutSummary />
             </Card>
           </div>
           <div>
-            <Card cardClass={`${styles.card} ${styles.pay}`}>
-              <h3>Stripe Checkout</h3>
+            <Card className={`${styles.card} ${styles.pay}`}>
+              <h3>Введите данные для оплаты</h3>
               <PaymentElement id={styles["payment-element"]} />
               <button disabled={isLoading || !stripe || !elements} id="submit" className={styles.button}>
                 <span id="button-text">
-                  {isLoading ? <div className={styles.spinner} id="spinner"></div> : "Pay now"}
+                  {isLoading ? <div className={styles.spinner} id="spinner"></div> : "Оплатить"}
                 </span>
               </button>
 

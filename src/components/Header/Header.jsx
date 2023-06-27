@@ -136,10 +136,10 @@ const Header = () => {
             <Basket />
           </div>
         </nav>
-        <NavLink className={styles.menuIcon}>
+        <div className={styles.menuIcon}>
           <Basket />
           <GiHamburgerMenu size={30} onClick={toggleMenu} />
-        </NavLink>
+        </div>
       </div>
     </header>
   );

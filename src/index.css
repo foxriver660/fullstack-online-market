@@ -155,10 +155,11 @@ p {
 
 a {
   font-size: 1.2rem;
-  color: var(--color-razer);
+  color: var(--color-white);
   text-decoration: none;
-  display: flex;
-  flex-direction: row;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
 }
 
 a:hover {

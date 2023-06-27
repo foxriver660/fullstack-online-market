@@ -14,7 +14,7 @@ const ProductsList = ({ products }) => {
   const [sort, setSort] = useState("latest");
   // PAGINATION STATE
   const [currentPage, setCurrentPage] = useState(1);
-  const [productsPerPage, setProductsPerPage] = useState(2);
+  const [productsPerPage, setProductsPerPage] = useState(6);
   const indexOfLastProduct = currentPage * productsPerPage;
   const indexOfFirstProduct = indexOfLastProduct - productsPerPage;
   const currentProducts = filteredList.slice(indexOfFirstProduct, indexOfLastProduct);
