@@ -1,5 +1,5 @@
 import { deleteDoc, doc } from "firebase/firestore";
-import React, { useEffect, useState } from "react";
+import React, { useEffect } from "react";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
 import classes from "./ViewProducts.module.scss";
@@ -11,6 +11,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { STORE_PRODUCTS } from "../../../redux/slice/productSlice";
 import useFetchCollection from "../../../hook/useFetchCollection";
 import { selectProduct } from "../../../redux/slice/productSlice";
+import { Loader } from "../../index";
 
 const ViewProducts = () => {
   const dispatch = useDispatch();
