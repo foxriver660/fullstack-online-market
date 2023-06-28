@@ -4,7 +4,6 @@
 
   .filter {
     width: 20%;
-    // border: 2px solid var(--dark-blue);
     transition: all 0.3s;
   }
 
@@ -29,8 +28,8 @@
   @media screen and (max-width: 700px) {
     .filter {
       width: 50%;
-      background-color: #fff;
-      border: 2px solid var(--dark-blue);
+      background-color: var(--color-white);
+      border: 2px solid var(--dark-razer);
       position: absolute;
       left: -200%;
       height: 100%;
@@ -38,7 +37,7 @@
       z-index: 99;
     }
     .show {
-            left: 0;
+      left: 0;
     }
     .content {
       width: 100%;

@@ -7,7 +7,7 @@ import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import { selectEmail, selectUserId } from "../../redux/slice/authSlice";
-import { CLEAR_CARD, selectCardItems, selectCardTotalAmount } from "../../redux/slice/cardSlice";
+import { CLEAR_BASKET, selectBasketItems, selectBasketTotalAmount } from "../../redux/slice/basketSlice";
 import { selectShippingAddress } from "../../redux/slice/checkoutSlice";
 import { addDoc, collection, Timestamp } from "firebase/firestore";
 import { db } from "../../firebase/config";
@@ -25,8 +25,8 @@ const CheckoutForm = () => {
 
   const userID = useSelector(selectUserId);
   const userEmail = useSelector(selectEmail);
-  const cartItems = useSelector(selectCardItems);
-  const cartTotalAmount = useSelector(selectCardTotalAmount);
+  const basketItems = useSelector(selectBasketItems);
+  const basketTotalAmount = useSelector(selectBasketTotalAmount);
   const shippingAddress = useSelector(selectShippingAddress);
 
   useEffect(() => {
@@ -51,15 +51,15 @@ const CheckoutForm = () => {
       userEmail,
       orderDate: date,
       orderTime: time,
-      orderAmount: cartTotalAmount,
+      orderAmount: basketTotalAmount,
       orderStatus: "Order Placed...",
-      cartItems,
+      basketItems,
       shippingAddress,
       createdAt: Timestamp.now().toDate(),
     };
     try {
       addDoc(collection(db, "orders"), orderConfig);
-      dispatch(CLEAR_CARD());
+      dispatch(CLEAR_BASKET());
       toast.success("Ордер сохранен");
       navigate("/checkout-success");
     } catch (error) {
@@ -95,7 +95,7 @@ const CheckoutForm = () => {
         if (result.paymentIntent) {
           if (result.paymentIntent.status === "succeeded") {
             setIsLoading(false);
-            toast.success("Payment successful");
+            toast.success("Оплата прошла успешно");
             saveOrder();
           }
         }
@@ -107,23 +107,23 @@ const CheckoutForm = () => {
   return (
     <section>
       <div className={`container ${styles.checkout}`}>
-        <h2>Checkout</h2>
+        <h2>Оплата</h2>
         <form onSubmit={handleSubmit}>
           <div>
-            <Card cardClass={styles.card}>
+            <Card className={styles.card}>
               <CheckoutSummary />
             </Card>
           </div>
           <div>
-            <Card cardClass={`${styles.card} ${styles.pay}`}>
-              <h3>Stripe Checkout</h3>
+            <Card className={`${styles.card} ${styles.pay}`}>
+              <h3>Введите данные для оплаты</h3>
               <PaymentElement id={styles["payment-element"]} />
               <button disabled={isLoading || !stripe || !elements} id="submit" className={styles.button}>
                 <span id="button-text">
-                  {isLoading ? <div className={styles.spinner} id="spinner"></div> : "Pay now"}
+                  {isLoading ? <div className={styles.spinner} id="spinner"></div> : "Оплатить"}
                 </span>
               </button>
-              {/* Show any error or success messages */}
+
               {message && <div id={styles["payment-message"]}>{message}</div>}
             </Card>
           </div>

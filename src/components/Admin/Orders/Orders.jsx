@@ -6,11 +6,11 @@ import { selectOrderHistory, STORE_ORDERS } from "../../../redux/slice/orderSlic
 import styles from "./Orders.module.scss";
 
 const Orders = () => {
-  const { data, isLoading } = useFetchCollection("orders");
-  const orders = useSelector(selectOrderHistory);
-
   const dispatch = useDispatch();
   const navigate = useNavigate();
+
+  const { data } = useFetchCollection("orders");
+  const orders = useSelector(selectOrderHistory);
 
   useEffect(() => {
     dispatch(STORE_ORDERS(data));

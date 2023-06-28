@@ -1,23 +1,26 @@
 import React, { useEffect, useState } from "react";
+import StarsRating from "react-star-rate";
 import styles from "./ProductsDetails.module.scss";
 import { useParams, useNavigate } from "react-router-dom";
-import { doc, getDoc } from "firebase/firestore";
-import { db } from "../../../firebase/config";
-import { toast } from "react-toastify";
 import { useDispatch, useSelector } from "react-redux";
-import { ADD_TO_CARD, CALCULATE_TOTAL_QUANTITY, DECREASE_CARD, selectCardItems } from "../../../redux/slice/cardSlice";
+import {
+  ADD_TO_BASKET,
+  CALCULATE_TOTAL_QUANTITY,
+  DECREASE_BASKET,
+  selectBasketItems,
+} from "../../../redux/slice/basketSlice";
 import useFetchDocument from "../../../hook/useFetchDocument";
 import useFetchCollection from "../../../hook/useFetchCollection";
-import Card from "../../Card/Card";
-import StarsRating from "react-star-rate";
+import { Card, Loader } from "../../index";
 
 const ProductsDetails = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const basketItems = useSelector(selectCardItems);
+
+  const basketItems = useSelector(selectBasketItems);
   const { id } = useParams();
   const [product, setProduct] = useState(null);
-  const card = basketItems.find((card) => card.id === id);
+  const basket = basketItems.find((card) => card.id === id);
   const isBasketAdded = basketItems.findIndex((card) => {
     return card.id === id;
   });
@@ -27,13 +30,12 @@ const ProductsDetails = () => {
 
   const filteredReviews = data.filter((review) => review.productID === id);
 
-  console.log(data);
   const addToBasket = (product) => {
-    dispatch(ADD_TO_CARD(product));
+    dispatch(ADD_TO_BASKET(product));
     dispatch(CALCULATE_TOTAL_QUANTITY());
   };
   const decreaseBasket = (product) => {
-    dispatch(DECREASE_CARD(product));
+    dispatch(DECREASE_BASKET(product));
     dispatch(CALCULATE_TOTAL_QUANTITY());
   };
   useEffect(() => {
@@ -48,8 +50,12 @@ const ProductsDetails = () => {
     <section>
       <div className={`container ${styles.product}`}>
         <h2>Описание товара</h2>
-        <div onClick={goBack}>&larr; Вернуться назад</div>
-        {product && (
+        <div onClick={goBack} className={styles.goBack}>
+          &larr; Вернуться назад
+        </div>
+        {!product ? (
+          <Loader />
+        ) : (
           <>
             <div className={styles.details}>
               <div className={styles.img}>
@@ -58,7 +64,10 @@ const ProductsDetails = () => {
               <div className={styles.content}>
                 <h3>{product.name}</h3>
                 <p className={styles.price}>{product.price} &#8381;</p>
-                <p>{product.desc}</p>
+                <p>
+                  <b>Описание:</b>
+                  {product.desc}
+                </p>
                 <p>
                   <b>Индентификатор:</b> {product.id}
                 </p>
@@ -72,7 +81,7 @@ const ProductsDetails = () => {
                         -
                       </button>
                       <p>
-                        <b>{card.cardQuantity}</b>
+                        <b>{basket.cardQuantity}</b>
                       </p>
                       <button className="--btn" onClick={() => addToBasket(product)}>
                         +
@@ -80,18 +89,18 @@ const ProductsDetails = () => {
                     </>
                   )}
                 </div>
-                <button onClick={() => addToBasket(product)} className="--btn --btn-danger">
-                  Добавить в корзину
+                <button onClick={() => addToBasket(product)} className="--btn --btn-primary">
+                  Добавить
                 </button>
               </div>
             </div>
           </>
         )}
         <Card cardClass={styles.card}>
-          <h3>Product Reviews</h3>
+          <h3>Отзывы о товаре:</h3>
           <div>
             {filteredReviews.length === 0 ? (
-              <p>There are no reviews for this product yet.</p>
+              <p>О данном товаре отзывы на сайте отсуствуют</p>
             ) : (
               <>
                 {filteredReviews.map((item, index) => {

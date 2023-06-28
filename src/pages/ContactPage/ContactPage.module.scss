@@ -1,32 +1,29 @@
 .contact {
-  .card {
-    padding: 1rem;
-    border: 1px solid #ccc;
-  }
+  .details {
+    .cardContact {
+      padding: 2rem;
 
-  .card2 {
-    padding: 2rem;
-    background-color: var(--light-blue);
-    color: #fff;
-    h3,
-    p {
-      color: #fff;
-    }
-    .icons {
-      margin: 3rem 0;
-      span {
-        display: flex;
-        justify-content: start;
-        align-items: center;
-        margin-bottom: 1rem;
-        a,
-        p {
-          margin-left: 5px;
+      background-color: var(--color-grey);
+      color: rgb(14, 10, 10);
+      h3,
+      p {
+        color: rgb(20, 14, 14);
+      }
+      .icons {
+        margin: 3rem 0;
+        span {
+          display: flex;
+          justify-content: start;
+          align-items: center;
+          margin-bottom: 1rem;
+          a,
+          p {
+            margin-left: 5px;
+          }
         }
       }
     }
   }
-
   .section {
     display: flex;
     align-items: start;
@@ -55,7 +52,7 @@
         margin: 1rem auto;
         width: 100%;
         border: 1px solid #777;
-        border-radius: 3px;
+        border-radius: 10px;
         outline: none;
       }
     }

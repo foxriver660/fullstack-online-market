@@ -2,52 +2,52 @@ import React, { useEffect } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { Link, useNavigate } from "react-router-dom";
 import {
-  ADD_TO_CARD,
+  ADD_TO_BASKET,
+  DECREASE_BASKET,
+  REMOVE_FROM_BASKET,
+  CLEAR_BASKET,
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_QUANTITY,
-  CLEAR_CARD,
-  DECREASE_CARD,
-  REMOVE_FROM_CARD,
   SAVE_URL,
-  selectCardItems,
-  selectCardTotalAmount,
-  selectCardTotalQuantity,
-} from "../../redux/slice/cardSlice";
+  selectBasketItems,
+  selectBasketTotalAmount,
+  selectBasketTotalQuantity,
+} from "../../redux/slice/basketSlice";
 import { FaTrashAlt } from "react-icons/fa";
 import Card from "../../components/card/Card";
 import styles from "./BasketPage.module.scss";
 import { selectIsLoggedIn } from "../../redux/slice/authSlice";
 
 const BasketPage = () => {
-  const cartItems = useSelector(selectCardItems);
-  const cartTotalAmount = useSelector(selectCardTotalAmount);
-  const cartTotalQuantity = useSelector(selectCardTotalQuantity);
   const dispatch = useDispatch();
-  const isLoggedIn = useSelector(selectIsLoggedIn);
-
   const navigate = useNavigate();
 
-  const increaseCart = (cart) => {
-    dispatch(ADD_TO_CARD(cart));
+  const basketItems = useSelector(selectBasketItems);
+  const basketTotalAmount = useSelector(selectBasketTotalAmount);
+  const basketTotalQuantity = useSelector(selectBasketTotalQuantity);
+  const isLoggedIn = useSelector(selectIsLoggedIn);
+
+  const increaseItem = (item) => {
+    dispatch(ADD_TO_BASKET(item));
   };
 
-  const decreaseCart = (cart) => {
-    dispatch(DECREASE_CARD(cart));
+  const decreaseItem = (item) => {
+    dispatch(DECREASE_BASKET(item));
   };
 
-  const removeFromCart = (cart) => {
-    dispatch(REMOVE_FROM_CARD(cart));
+  const removeFromBasket = (item) => {
+    dispatch(REMOVE_FROM_BASKET(item));
   };
 
-  const clearCart = () => {
-    dispatch(CLEAR_CARD());
+  const clearBasket = () => {
+    dispatch(CLEAR_BASKET());
   };
 
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
     dispatch(CALCULATE_TOTAL_QUANTITY());
     dispatch(SAVE_URL(""));
-  }, [cartItems, dispatch]);
+  }, [basketItems, dispatch]);
 
   const url = window.location.href;
 
@@ -63,13 +63,13 @@ const BasketPage = () => {
   return (
     <section>
       <div className={`container ${styles.table}`}>
-        <h2>Shopping Basket</h2>
-        {cartItems.length === 0 ? (
+        <h2>Корзина</h2>
+        {basketItems.length === 0 ? (
           <>
-            <p>Your basket is currently empty.</p>
+            <p>Ваша корзина пуста</p>
             <br />
             <div>
-              <Link to="/#products">&larr; Continue shopping</Link>
+              <Link to="/#products">&larr; Продолжить покупки</Link>
             </div>
           </>
         ) : (
@@ -77,17 +77,17 @@ const BasketPage = () => {
             <table>
               <thead>
                 <tr>
-                  <th>s/n</th>
-                  <th>Product</th>
-                  <th>Price</th>
-                  <th>Quantity</th>
-                  <th>Total</th>
-                  <th>Action</th>
+                  <th>№</th>
+                  <th>Товар</th>
+                  <th>Цена</th>
+                  <th>Количество</th>
+                  <th>Всего</th>
+                  <th></th>
                 </tr>
               </thead>
               <tbody>
-                {cartItems.map((cart, index) => {
-                  const { id, name, price, imageURL, cartQuantity } = cart;
+                {basketItems.map((item, index) => {
+                  const { id, name, price, imageURL, basketQuantity } = item;
                   return (
                     <tr key={id}>
                       <td>{index + 1}</td>
@@ -100,20 +100,20 @@ const BasketPage = () => {
                       <td>{price}</td>
                       <td>
                         <div className={styles.count}>
-                          <button className="--btn" onClick={() => decreaseCart(cart)}>
+                          <button className="--btn" onClick={() => decreaseItem(item)}>
                             -
                           </button>
                           <p>
-                            <b>{cartQuantity}</b>
+                            <b>{basketQuantity}</b>
                           </p>
-                          <button className="--btn" onClick={() => increaseCart(cart)}>
+                          <button className="--btn" onClick={() => increaseItem(item)}>
                             +
                           </button>
                         </div>
                       </td>
-                      <td>{(price * cartQuantity).toFixed(2)}</td>
+                      <td>{(price * basketQuantity).toFixed(2)}</td>
                       <td className={styles.icons}>
-                        <FaTrashAlt size={19} color="red" onClick={() => removeFromCart(cart)} />
+                        <FaTrashAlt size={19} color="red" onClick={() => removeFromBasket(item)} />
                       </td>
                     </tr>
                   );
@@ -121,25 +121,24 @@ const BasketPage = () => {
               </tbody>
             </table>
             <div className={styles.summary}>
-              <button className="--btn --btn-danger" onClick={clearCart}>
-                Clear basket
+              <button className="--btn --btn-primary" onClick={clearBasket}>
+                Очистить корзину
               </button>
               <div className={styles.checkout}>
                 <div>
-                  <Link to="/#products">&larr; Continue shopping</Link>
+                  <Link to="/#products">&larr; Продолжить покупки</Link>
                 </div>
                 <br />
                 <Card cardClass={styles.card}>
                   <p>
-                    <b> {`Basket item(s): ${cartTotalQuantity}`}</b>
+                    <b> {`Товаров в корзине: ${basketTotalQuantity}`}</b>
                   </p>
                   <div className={styles.text}>
-                    <h4>Subtotal:</h4>
-                    <h3>{`${cartTotalAmount.toFixed(2)}₽`}</h3>
+                    <h4>Всего на:</h4>
+                    <h3>{`${basketTotalAmount.toFixed(2)}₽`}</h3>
                   </div>
-                  <p>Tax an shipping calculated at checkout</p>
-                  <button className="--btn --btn-primary --btn-block" onClick={checkout}>
-                    Checkout
+                  <button className="--btn --btn-submit --btn-block" onClick={checkout}>
+                    Купить
                   </button>
                 </Card>
               </div>

@@ -1,7 +1,6 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import styles from "./Header.module.scss";
 import { Link, NavLink, useNavigate } from "react-router-dom";
-import { BsCart4 } from "react-icons/bs";
 import { GiHamburgerMenu } from "react-icons/gi";
 import { VscChromeClose } from "react-icons/vsc";
 import { FaUserCircle } from "react-icons/fa";
@@ -9,16 +8,16 @@ import Basket from "../Basket/Basket";
 import { onAuthStateChanged, signOut } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";
-import { useDispatch, useSelector } from "react-redux/es/exports";
+import { useDispatch } from "react-redux/es/exports";
 import { SET_ACTIVE_USER, REMOVE_ACTIVE_USER } from "../../redux/slice/authSlice";
 import { ShowOnLogin, ShowOnLogOut } from "../HiddenLinks/HiddenLinks";
-import AdminOnlyRoute, { AdminOnlyLink } from "../AdminOnlyRoute/AdminOnlyRoute";
-import { CALCULATE_TOTAL_QUANTITY, selectCardTotalQuantity } from "../../redux/slice/cardSlice";
+import { AdminOnlyLink } from "../AdminOnlyRoute/AdminOnlyRoute";
+
 const logo = (
   <div className={styles.logo}>
     <Link className={styles.logoLink} to="/">
       <h2 className={styles.logoTitle}>
-        e <span>Shop</span>.
+        Online<span>Market</span>.
       </h2>
     </Link>
   </div>
@@ -29,13 +28,12 @@ const activeLink = ({ isActive }) => (isActive ? styles.active : styles.navLink)
 const Header = () => {
   const navigate = useNavigate();
   const dispatch = useDispatch();
-  const cartTotalQuantity = useSelector(selectCardTotalQuantity);
-  const [userName, setUserName] = React.useState("");
-  const [showMenu, setShowMenu] = React.useState(false);
-
+  const [userName, setUserName] = useState("");
+  const [showMenu, setShowMenu] = useState(false);
+  /* 
   useEffect(() => {
     dispatch(CALCULATE_TOTAL_QUANTITY());
-  }, []);
+  }, []); */
 
   useEffect(() => {
     onAuthStateChanged(auth, (user) => {
@@ -93,8 +91,8 @@ const Header = () => {
             </li>
             <li>
               <AdminOnlyLink>
-                <Link to="/admin" className="--btn --btn-primary">
-                  Admin
+                <Link to="/admin" className="--btn --btn-admin">
+                  admin
                 </Link>
               </AdminOnlyLink>
             </li>

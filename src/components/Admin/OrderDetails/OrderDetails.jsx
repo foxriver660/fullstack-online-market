@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useFetchDocument from "../../../hook/useFetchDocument";
+import { Loader } from "../../index";
 import ChangeOrderStatus from "../ChangeOrderStatus/ChangeOrderStatus";
 import styles from "./OrderDetails.module.scss";
 
@@ -22,7 +23,7 @@ const OrderDetails = () => {
         </div>
         <br />
         {!order ? (
-          <p>loading...</p>
+          <Loader />
         ) : (
           <>
             <p>
@@ -51,8 +52,8 @@ const OrderDetails = () => {
                 </tr>
               </thead>
               <tbody>
-                {order.cartItems.map((cart, index) => {
-                  const { id, name, price, imageURL, cardQuantity } = cart;
+                {order.basketItems.map((cart, index) => {
+                  const { id, name, price, imageURL, basketQuantity } = cart;
                   return (
                     <tr key={id}>
                       <td>
@@ -65,8 +66,8 @@ const OrderDetails = () => {
                         <img src={imageURL} alt={name} style={{ width: "100px" }} />
                       </td>
                       <td>{price}₽</td>
-                      <td>{cardQuantity}</td>
-                      <td>{(price * cardQuantity).toFixed(2)}₽</td>
+                      <td>{basketQuantity}</td>
+                      <td>{(price * basketQuantity).toFixed(2)}₽</td>
                     </tr>
                   );
                 })}

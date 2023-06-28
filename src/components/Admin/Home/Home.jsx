@@ -14,7 +14,7 @@ import {
 } from "../../../redux/slice/orderSlice";
 import { selectProduct, STORE_PRODUCTS } from "../../../redux/slice/productSlice";
 import useFetchCollection from "../../../hook/useFetchCollection";
-//Icons
+
 const earningIcon = <AiFillDollarCircle size={30} color="#b624ff" />;
 const productIcon = <BsCart4 size={30} color="#1f93ff" />;
 const ordersIcon = <FaCartArrowDown size={30} color="orangered" />;
@@ -23,7 +23,7 @@ const Home = () => {
   const products = useSelector(selectProduct);
   const orders = useSelector(selectOrderHistory);
   const totalOrderAmount = useSelector(selectTotalOrderAmount);
-  console.log(products);
+
   const fbProducts = useFetchCollection("products");
   const { data } = useFetchCollection("orders");
 
@@ -38,23 +38,23 @@ const Home = () => {
 
   return (
     <div className={styles.home}>
-      <h2>Admin Home</h2>
+      <h2>Страница администратора</h2>
       <div className={styles["info-box"]}>
         <InfoBox
           cardClass={`${styles.card} ${styles.card1}`}
-          title={"Earnings"}
-          count={`$${totalOrderAmount}`}
+          title={"Доход"}
+          count={`${totalOrderAmount}₽`}
           icon={earningIcon}
         />
         <InfoBox
           cardClass={`${styles.card} ${styles.card2}`}
-          title={"Products"}
+          title={"Товары"}
           count={products.length}
           icon={productIcon}
         />
         <InfoBox
           cardClass={`${styles.card} ${styles.card3}`}
-          title={"Orders"}
+          title={"Заказы"}
           count={orders.length}
           icon={ordersIcon}
         />

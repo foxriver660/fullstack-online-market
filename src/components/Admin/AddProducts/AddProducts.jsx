@@ -1,15 +1,10 @@
 import { addDoc, collection, doc, setDoc, Timestamp } from "firebase/firestore";
-import {
-  deleteObject,
-  getDownloadURL,
-  ref,
-  uploadBytesResumable,
-} from "firebase/storage";
+import { deleteObject, getDownloadURL, ref, uploadBytesResumable } from "firebase/storage";
 import { useNavigate, useParams } from "react-router-dom";
 import React, { useState } from "react";
 import { toast } from "react-toastify";
 import { db, storage } from "../../../firebase/config";
-import Card from "../../Card/Card";
+import { Card, Loader } from "../../index";
 import classes from "./AddProducts.module.scss";
 
 import { useSelector } from "react-redux";
@@ -75,8 +70,7 @@ const AddProducts = () => {
     uploadTask.on(
       "state_changed",
       (snapshot) => {
-        const progress =
-          (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
+        const progress = (snapshot.bytesTransferred / snapshot.totalBytes) * 100;
         setProgress(progress);
       },
       (error) => {
@@ -88,7 +82,7 @@ const AddProducts = () => {
             ...product,
             imageURL: downloadURL,
           });
-          toast.success("Product IMG added successfully");
+          toast.success("Изображение товара добавлено успешно");
         });
       }
     );
@@ -108,7 +102,7 @@ const AddProducts = () => {
         desc: product.desc,
         createdAt: Timestamp.now().toDate(),
       });
-      toast.success("Product added successfully");
+      toast.success("Товар добавлен успешно!");
       setIsLoading(false);
       setProgress(0);
       setProduct({
@@ -148,100 +142,75 @@ const AddProducts = () => {
   };
   return (
     <>
-      {isLoading && <Loader />}
-      <div className={classes.product}>
-        <h2>{detectForm(id, "Добавить новый продукт", "Изменить продукт")}</h2>
-        <Card className={classes.card}>
-          <form onSubmit={detectForm(id, addProduct, editProduct)}>
-            <label>Название:</label>
-            <input
-              type="text"
-              name="name"
-              value={product.name}
-              onChange={handleChange}
-              required
-            />
-            <label>Изображение:</label>
-            <Card className={classes.group}>
-              {progress === 0 ? null : (
-                <div className={classes.progress}>
-                  <div
-                    style={{ width: `${progress}%` }}
-                    className={classes.progress_bar}
-                  >
-                    {progress < 100
-                      ? `Загружено: ${progress}%`
-                      : `Загрузка завершена  ${progress}%`}
+      {isLoading ? (
+        <Loader />
+      ) : (
+        <div className={classes.product}>
+          <h2>{detectForm(id, "Добавить новый продукт", "Изменить продукт")}</h2>
+          <Card className={classes.card}>
+            <form onSubmit={detectForm(id, addProduct, editProduct)}>
+              <label>Название:</label>
+              <input type="text" name="name" value={product.name} onChange={handleChange} required />
+              <label>Изображение:</label>
+              <Card className={classes.group}>
+                {progress === 0 ? null : (
+                  <div className={classes.progress}>
+                    <div style={{ width: `${progress}%` }} className={classes.progress_bar}>
+                      {progress < 100 ? `Загружено: ${progress}%` : `Загрузка завершена  ${progress}%`}
+                    </div>
                   </div>
-                </div>
-              )}
-              <input
-                type="file"
-                name="image"
-                accept="image/*"
-                onChange={handleImageChange}
-                placeholder="Product Image"
-              />
-              {product.imageURL === "" ? null : (
+                )}
                 <input
-                  type="text"
-                  // required
-                  placeholder="Image URL"
-                  name="imageURL"
-                  value={product.imageURL}
-                  disabled
+                  type="file"
+                  name="image"
+                  accept="image/*"
+                  onChange={handleImageChange}
+                  placeholder="Product Image"
                 />
-              )}
-            </Card>
-            <label>Стоимость:</label>
-            <input
-              type="number"
-              name="price"
-              value={product.price}
-              onChange={handleChange}
-              required
-            />
-            <label>Категория:</label>
-            <select
-              required
-              name="category"
-              value={product.category}
-              onChange={handleChange}
-            >
-              <option value="" disabled>
-                Выберите категорию
-              </option>
-              {categorys.map((category) => {
-                return (
-                  <option key={category.id} value={category.name}>
-                    {category.name}
-                  </option>
-                );
-              })}
-            </select>
-            <label>Брэнд:</label>
-            <input
-              type="text"
-              name="brand"
-              value={product.brand}
-              onChange={handleChange}
-              required
-            />
-            <label>Описание:</label>
-            <textarea
-              cols="30"
-              rows="10"
-              name="desc"
-              value={product.desc}
-              onChange={handleChange}
-              required
-            ></textarea>
-            <button className="--btn --btn-primary" type="submit">
-              {detectForm(id, "Добавить", "Изменить")}
-            </button>
-          </form>
-        </Card>
-      </div>
+                {product.imageURL === "" ? null : (
+                  <input
+                    type="text"
+                    // required
+                    placeholder="Image URL"
+                    name="imageURL"
+                    value={product.imageURL}
+                    disabled
+                  />
+                )}
+              </Card>
+              <label>Стоимость:</label>
+              <input type="number" name="price" value={product.price} onChange={handleChange} required />
+              <label>Категория:</label>
+              <select required name="category" value={product.category} onChange={handleChange}>
+                <option value="" disabled>
+                  Выберите категорию
+                </option>
+                {categorys.map((category) => {
+                  return (
+                    <option key={category.id} value={category.name}>
+                      {category.name}
+                    </option>
+                  );
+                })}
+              </select>
+              <label>Брэнд:</label>
+              <input type="text" name="brand" value={product.brand} onChange={handleChange} required />
+              <label>Описание:</label>
+              <textarea
+                cols="30"
+                rows="10"
+                name="desc"
+                value={product.desc}
+                onChange={handleChange}
+                required
+              ></textarea>
+              <button className="--btn --btn-primary" type="submit">
+                {detectForm(id, "Добавить", "Изменить")}
+              </button>
+            </form>
+          </Card>
+        </div>
+      )}
     </>
   );
 };

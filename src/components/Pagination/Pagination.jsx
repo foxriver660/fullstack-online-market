@@ -63,8 +63,8 @@ const Pagination = ({ currentPage, setCurrentPage, productsPerPage, totalProduct
       </li>
 
       <p>
-        <b className={style.page}>{`page ${currentPage}`}</b>
-        <span>{` of `}</span>
+        страница <b className={style.page}>{` ${currentPage}`}</b>
+        <span>{` из `}</span>
         <b>{`${Math.ceil(totalPages)}`}</b>
       </p>
     </ul>

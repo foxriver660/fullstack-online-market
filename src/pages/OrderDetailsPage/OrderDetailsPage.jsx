@@ -7,8 +7,7 @@ const OrderDetailsPage = () => {
   const [order, setOrder] = useState();
   const { id } = useParams();
   const { document } = useFetchDocument("orders", id);
-  console.log(id);
-  console.log(order);
+
   useEffect(() => {
     setOrder(document);
   }, [document]);
@@ -47,8 +46,8 @@ const OrderDetailsPage = () => {
                 </tr>
               </thead>
               <tbody>
-                {order.cartItems.map((cart, index) => {
-                  const { id, name, price, imageURL, cardQuantity } = cart;
+                {order.basketItems.map((cart, index) => {
+                  const { id, name, price, imageURL, basketQuantity } = cart;
                   return (
                     <tr key={id}>
                       <td>
@@ -61,8 +60,8 @@ const OrderDetailsPage = () => {
                         <img src={imageURL} alt={name} style={{ width: "100px" }} />
                       </td>
                       <td>{price}₽</td>
-                      <td>{cardQuantity}</td>
-                      <td>{(price * cardQuantity).toFixed(2)}₽</td>
+                      <td>{basketQuantity}</td>
+                      <td>{(price * basketQuantity).toFixed(2)}₽</td>
 
                       <td className={styles.icons}>
                         <Link to={`/review-product/${id}`}>

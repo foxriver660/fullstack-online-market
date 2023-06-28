@@ -1,11 +1,11 @@
 .header {
   width: 100%;
-  background-color: var(--dark-blue);
+  background-color: var(--dark-razer);
   color: var(--color-white);
-
+  display: flex;
   .mainWrapper {
     width: 100%;
-    height: 8rem;
+    height: 5rem;
     max-width: 1000px;
     margin: 0 auto;
     padding: 1rem;
@@ -17,12 +17,11 @@
 
   .logo .logoLink .logoTitle {
     display: flex;
-    font-size: 5rem;
-    width: 25%;
+    font-size: 3rem;
     color: var(--color-white);
     cursor: pointer;
     span {
-      color: orangered;
+      color: var(--color-razer);
     }
   }
 
@@ -43,9 +42,6 @@
         margin: 0 5px;
         .navLink {
           color: var(--color-white);
-          &:hover {
-            color: orangered;
-          }
         }
       }
     }
@@ -60,11 +56,9 @@
       align-items: center;
       color: var(--color-white);
       position: relative;
-      &:hover {
-        color: orangered;
-      }
+
       &.active {
-        color: var(--color-danger);
+        color: var(--color-razer);
       }
       p {
         position: absolute;
@@ -75,21 +69,18 @@
     }
 
     span {
-      margin: 0 5px;
+      display: flex;
 
+      gap: 5px;
       p {
         color: #fff;
       }
     }
 
     .links .navLink {
-      margin: 0 5px;
       color: #fff;
-      &:hover {
-        color: orangered;
-      }
       &.active {
-        color: var(--color-danger);
+        color: var(--color-razer);
       }
     }
   }
@@ -101,6 +92,7 @@
   .logoMobile {
     display: none;
   }
+
   @media screen and (max-width: 800px) {
     .nav {
       display: block;
@@ -109,7 +101,7 @@
       left: 0;
       width: 50%;
       height: 100vh;
-      background-color: var(--dark-blue);
+      background-color: var(--dark-razer);
       padding: 1rem;
       z-index: 999;
       transform: translateX(-200%);
@@ -151,23 +143,15 @@
 
       .rigthNavBar {
         display: block;
+        padding-left: 5px;
         .cart {
-          // display: block;
-          // padding: 5px 0;
           border-bottom: 1px solid #333;
-          // a {
-          //   position: relative;
-          //   p {
-          //     position: absolute;
-          //     top: -1rem;
-          //     left: 5rem;
-          //     font-weight: 500;
-          //   }
-          // }
         }
 
         .links {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
           .navLink {
             display: block;
             margin: 0;
@@ -180,19 +164,16 @@
     .cart {
       display: block;
       padding: 5px 0;
-      // border-bottom: 1px solid #333;
       .cartLink {
-        color: #fff;
+        color: var(--color-white);
         position: relative;
-        &:hover {
-          color: orangered;
-        }
+
         p {
           position: absolute;
           top: -1rem;
           left: 7rem;
           font-weight: 500;
-          color: #fff;
+          color: var(--color-white);
         }
       }
     }
@@ -214,6 +195,6 @@
 // ВЫДЕЛЕНИЕ АКТИВНОЙ СТРАНИЦЫ
 .active {
   position: relative;
-  color: var(--color-danger);
+  color: var(--color-razer);
   text-decoration: none;
 }

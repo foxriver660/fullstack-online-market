@@ -42,7 +42,7 @@ const Chart = () => {
     labels: ["Placed Orders", "Processing", "Shipped", "Delivered"],
     datasets: [
       {
-        label: "Order count",
+        label: "Число заказов",
         data: [placed, processing, shipped, delivered],
         backgroundColor: "rgba(255, 99, 132, 0.5)",
       },
@@ -51,7 +51,7 @@ const Chart = () => {
   return (
     <div className={styles.charts}>
       <Card cardClass={styles.card}>
-        <h3>Order Status Chart</h3>
+        <h3>График выполнения заказов</h3>
         <Bar options={options} data={data} />
       </Card>
     </div>

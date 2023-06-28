@@ -5,24 +5,22 @@ import { Elements } from "@stripe/react-stripe-js";
 import {
   CALCULATE_SUBTOTAL,
   CALCULATE_TOTAL_QUANTITY,
-  selectCardItems,
-  selectCardTotalAmount,
-} from "../../redux/slice/cardSlice";
+  selectBasketItems,
+  selectBasketTotalAmount,
+} from "../../redux/slice/basketSlice";
 import { selectEmail } from "../../redux/slice/authSlice";
 import { selectBillingAddress, selectShippingAddress } from "../../redux/slice/checkoutSlice";
 import { toast } from "react-toastify";
 import CheckoutForm from "../../components/checkoutForm/checkoutForm";
-const stripePromise = loadStripe(
-  "pk_test_51NM66TFAmsoQbm5g2ssPllrqBlAAZmk6MOQco9hkX6CEfFDBLtgyIL3Kg8AVsI2mTtpPPY2dj9YrBG1VVtVgghsY001cZe3REq"
-);
+const stripePromise = loadStripe(import.meta.env.VITE_STRIPE_PK);
 
 const Checkout = () => {
   const dispatch = useDispatch();
-  const [message, setMessage] = useState("Initializing checkout...");
+  const [message, setMessage] = useState("Инициализация оплаты...");
   const [clientSecret, setClientSecret] = useState("");
 
-  const cardItems = useSelector(selectCardItems);
-  const totalAmount = useSelector(selectCardTotalAmount);
+  const basketItems = useSelector(selectBasketItems);
+  const totalAmount = useSelector(selectBasketTotalAmount);
   const customerEmail = useSelector(selectEmail);
 
   const shippingAddress = useSelector(selectShippingAddress);
@@ -31,15 +29,15 @@ const Checkout = () => {
   useEffect(() => {
     dispatch(CALCULATE_SUBTOTAL());
     dispatch(CALCULATE_TOTAL_QUANTITY());
-  }, [dispatch, cardItems]);
-  const description = `eShop payment: email: ${customerEmail}, Amount: ${totalAmount}`;
+  }, [dispatch, basketItems]);
+  const description = `SShop payment: email: ${customerEmail}, Amount: ${totalAmount}`;
   useEffect(() => {
     // Create PaymentIntent as soon as the page loads
     fetch("http://localhost:4242/create-payment-intent", {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({
-        items: cardItems,
+        items: basketItems,
         userEmail: customerEmail,
         shipping: shippingAddress,
         billing: billingAddress,
@@ -55,7 +53,7 @@ const Checkout = () => {
       .then((data) => setClientSecret(data.clientSecret))
       .catch((error) => {
         setMessage("Failed to initialize checkout");
-        toast.error("Something went wrong!!!");
+        toast.error("Что-то пошло не так!!!");
       });
   }, []);
 

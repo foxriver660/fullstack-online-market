@@ -24,6 +24,7 @@
       .navLink {
         display: block;
         width: 100%;
+        color: var(--dark-razer);
       }
     }
   }
@@ -31,6 +32,7 @@
 
 .active {
   cursor: pointer;
+  color: black;
 }
 
 .active::before {
@@ -40,5 +42,5 @@
   top: 0;
   width: 4px;
   height: 100%;
-  background-color: orangered;
+  background-color: var(--color-razer);
 }
