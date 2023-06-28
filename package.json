@@ -2,6 +2,7 @@
   "name": "fullstack-online-marke",
   "private": true,
   "version": "0.1.0",
+  "homepage": "./",
   "scripts": {
     "dev: backend": "nodemon server.js",
     "dev: frontend": "vite",
