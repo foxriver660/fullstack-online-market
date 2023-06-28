@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route } from "react-router-dom";
-// COMPONENTS
+
 import { Header, Footer } from "./components/index";
-// PAGES
+
 import {
   HomePage,
   ContactPage,
