@@ -7,12 +7,10 @@ import Card from "../../Card/Card";
 import styles from "./ChangeOrderStatus.module.scss";
 const ChangeOrderStatus = ({ order, id }) => {
   const [status, setStatus] = useState("");
-  const [isLoading, setIsLoading] = useState(false);
   const navigate = useNavigate();
 
   const editOrder = (e, id) => {
     e.preventDefault();
-    setIsLoading(true);
 
     const orderConfig = {
       userID: order.userID,
@@ -21,19 +19,16 @@ const ChangeOrderStatus = ({ order, id }) => {
       orderTime: order.orderTime,
       orderAmount: order.orderAmount,
       orderStatus: status,
-      cartItems: order.cartItems,
+      basketItems: order.basketItems,
       shippingAddress: order.shippingAddress,
       createdAt: order.createdAt,
       editedAt: Timestamp.now().toDate(),
     };
     try {
       setDoc(doc(db, "orders", id), orderConfig);
-
-      setIsLoading(false);
-      toast.success("Order status changes successfully");
+      toast.success("Статус заказа обновлен");
       navigate("/admin/orders");
     } catch (error) {
-      setIsLoading(false);
       toast.error(error.message);
     }
   };

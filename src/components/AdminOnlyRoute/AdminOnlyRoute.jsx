@@ -11,7 +11,7 @@ const AdminOnlyRoute = ({ children }) => {
     return (
       <section className="section">
         <h1 className="title">У Вас нет прав для входа на эту страницу</h1>
-        <Link to="/" className="--btn btn">
+        <Link to="/" className="--btn">
           &larr; Вернутся на главную страницу
         </Link>
       </section>

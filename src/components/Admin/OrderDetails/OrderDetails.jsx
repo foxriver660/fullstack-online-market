@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link, useParams } from "react-router-dom";
 import useFetchDocument from "../../../hook/useFetchDocument";
+import { Loader } from "../../index";
 import ChangeOrderStatus from "../ChangeOrderStatus/ChangeOrderStatus";
 import styles from "./OrderDetails.module.scss";
 
@@ -22,7 +23,7 @@ const OrderDetails = () => {
         </div>
         <br />
         {!order ? (
-          <p>loading...</p>
+          <Loader />
         ) : (
           <>
             <p>

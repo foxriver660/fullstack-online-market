@@ -143,12 +143,15 @@
 
       .rigthNavBar {
         display: block;
+        padding-left: 5px;
         .cart {
           border-bottom: 1px solid #333;
         }
 
         .links {
-          display: block;
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
           .navLink {
             display: block;
             margin: 0;
