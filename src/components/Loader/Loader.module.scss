@@ -1,0 +1,15 @@
+.loader {
+  margin: 3rem;
+  padding: 1rem;
+  width: 1rem;
+  height: 1rem;
+  border: 12px solid var(--color-razer-ligth);
+  border-radius: 50%;
+  border-left-color: var(--color-razer);
+  animation: loader 0.3s linear infinite;
+}
+@keyframes loader {
+  100% {
+    transform: rotate(360deg);
+  }
+}

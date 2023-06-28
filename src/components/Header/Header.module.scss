@@ -1,0 +1,200 @@
+.header {
+  width: 100%;
+  background-color: var(--dark-razer);
+  color: var(--color-white);
+  display: flex;
+  .mainWrapper {
+    width: 100%;
+    height: 5rem;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 1rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: relative;
+  }
+
+  .logo .logoLink .logoTitle {
+    display: flex;
+    font-size: 3rem;
+    color: var(--color-white);
+    cursor: pointer;
+    span {
+      color: var(--color-razer);
+    }
+  }
+
+  .nav {
+    width: 75%;
+    display: flex;
+    justify-content: space-between;
+    .navList {
+      display: flex;
+      justify-content: space-between;
+      list-style: none;
+      align-items: center;
+      .logo-mobile {
+        display: none;
+      }
+
+      .navItem {
+        margin: 0 5px;
+        .navLink {
+          color: var(--color-white);
+        }
+      }
+    }
+  }
+
+  .rigthNavBar {
+    display: flex;
+    align-items: center;
+
+    .cart .cartLink {
+      display: flex;
+      align-items: center;
+      color: var(--color-white);
+      position: relative;
+
+      &.active {
+        color: var(--color-razer);
+      }
+      p {
+        position: absolute;
+        top: -1rem;
+        right: -1rem;
+        font-weight: 500;
+      }
+    }
+
+    span {
+      display: flex;
+
+      gap: 5px;
+      p {
+        color: #fff;
+      }
+    }
+
+    .links .navLink {
+      color: #fff;
+      &.active {
+        color: var(--color-razer);
+      }
+    }
+  }
+
+  .menuIcon {
+    cursor: pointer;
+    display: none;
+  }
+  .logoMobile {
+    display: none;
+  }
+
+  @media screen and (max-width: 800px) {
+    .nav {
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 50%;
+      height: 100vh;
+      background-color: var(--dark-razer);
+      padding: 1rem;
+      z-index: 999;
+      transform: translateX(-200%);
+      transition: all 0.3s;
+
+      .navWrapper {
+        position: absolute;
+        top: 0;
+        right: 0;
+        width: 100%;
+        height: 100vh;
+        background-color: rgba(0, 0, 0, 0.5);
+        transform: translateX();
+        transition: all 0.3s;
+      }
+
+      .showNavWrapper {
+        transform: translateX(100%);
+      }
+
+      .navList {
+        display: block;
+        .logoMobile {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+          > * {
+            cursor: pointer;
+          }
+        }
+        .navItem {
+          padding: 5px 0;
+          border-bottom: 1px solid #333;
+          .navLink {
+            display: block;
+          }
+        }
+      }
+
+      .rigthNavBar {
+        display: block;
+        padding-left: 5px;
+        .cart {
+          border-bottom: 1px solid #333;
+        }
+
+        .links {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-start;
+          .navLink {
+            display: block;
+            margin: 0;
+            padding: 5px 0;
+            border-bottom: 1px solid #333;
+          }
+        }
+      }
+    }
+    .cart {
+      display: block;
+      padding: 5px 0;
+      .cartLink {
+        color: var(--color-white);
+        position: relative;
+
+        p {
+          position: absolute;
+          top: -1rem;
+          left: 7rem;
+          font-weight: 500;
+          color: var(--color-white);
+        }
+      }
+    }
+    .showNav {
+      transform: translateX(0);
+    }
+    .hideNav {
+      transform: translateX(-200%);
+    }
+    .menuIcon {
+      display: flex;
+      > * {
+        margin-left: 2rem;
+      }
+    }
+  }
+}
+
+// ВЫДЕЛЕНИЕ АКТИВНОЙ СТРАНИЦЫ
+.active {
+  position: relative;
+  color: var(--color-razer);
+  text-decoration: none;
+}

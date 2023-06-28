@@ -1,0 +1,15 @@
+.section{
+  height: 80vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+.title{
+ color: var(--color-danger)
+}
+.btn{
+  outline: 2px solid black;
+  box-shadow: 0 0 2px;
+  color: black
+}
