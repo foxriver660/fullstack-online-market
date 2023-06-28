@@ -1,0 +1,46 @@
+.navbar {
+  border-right: 1px solid #ccc;
+  min-height: 80vh;
+
+  .user {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    padding: 2rem;
+    background-color: var(--light-blue);
+
+    .userName {
+      padding-top: 1rem;
+      color: #fff;
+    }
+  }
+
+  .nav .navList {
+    .navItem {
+      border-bottom: 1px solid #ccc;
+      padding: 1rem;
+      position: relative;
+      .navLink {
+        display: block;
+        width: 100%;
+        color: var(--dark-razer);
+      }
+    }
+  }
+}
+
+.active {
+  cursor: pointer;
+  color: black;
+}
+
+.active::before {
+  content: "";
+  position: absolute;
+  right: 0;
+  top: 0;
+  width: 4px;
+  height: 100%;
+  background-color: var(--color-razer);
+}

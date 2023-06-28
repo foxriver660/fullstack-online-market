@@ -1,11 +1,12 @@
-import React from 'react'
-import classes from './HomePage.module.scss'
+import React from "react";
+import { Products } from "../../components/index";
+
 const HomePage = () => {
   return (
-    <div>
-      
-    </div>
-  )
-}
+    <section>
+      <Products />
+    </section>
+  );
+};
 
-export default HomePage
+export default HomePage;
