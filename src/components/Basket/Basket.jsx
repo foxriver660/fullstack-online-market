@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React from "react";
 import classes from "./Basket.module.scss";
 import { Link } from "react-router-dom";
 import { BsCart4 } from "react-icons/bs";
