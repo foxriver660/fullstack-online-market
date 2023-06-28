@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import classes from "./Auth.module.scss";
 import { Link } from "react-router-dom";
 import { Card } from "../../components/index";
-import resetImg from "../../images/man-hold-registration-clipboard-checklist-man-hold-hand-clipboard-agreement-flat-design-vector-illustration-background-112434342.jpg";
+import resetImg from "../../images/reg.jpg";
 import { sendPasswordResetEmail } from "firebase/auth";
 import { auth } from "../../firebase/config";
 import { toast } from "react-toastify";

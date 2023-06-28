@@ -4,7 +4,7 @@ import "react-toastify/dist/ReactToastify.css";
 import classes from "./Auth.module.scss";
 import { Link, useNavigate } from "react-router-dom";
 import { Card } from "../../components/index";
-import registerImg from "../../images/man-hold-registration-clipboard-checklist-man-hold-hand-clipboard-agreement-flat-design-vector-illustration-background-112434342.jpg";
+import registerImg from "../../images/reg.jpg";
 import { createUserWithEmailAndPassword } from "firebase/auth";
 import { auth } from "../../firebase/config";
 

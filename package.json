@@ -7,9 +7,7 @@
     "dev: backend": "nodemon server.js",
     "dev: frontend": "vite",
     "dev": "node server",
-    "build": "vite build",
-    "predeploy": "npm run build",
-    "deploy": "gh-pages -d build",
+    "deploy": "vite build && gh-pages -d dist",
     "preview": "vite preview"
   },
   "dependencies": {
