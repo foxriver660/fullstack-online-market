@@ -1,4 +1,4 @@
-# Welcome to **[fullstack-online-market](https://github.com/foxriver660/fullstack-online-market)**!
+# Welcome to **[Online market](https://github.com/foxriver660/fullstack-online-market)**!
 
 This is a full-stack application, an online store with the ability to select products, add them to the cart, pay for purchases. Also, the user can leave reviews for the product, which are also displayed under the product. The backend of the application is **firebase**. From the side of the site administrator, full administration is possible, including adding products, tracking orders, changing the status of orders, summary statistics on orders, etc.
 
