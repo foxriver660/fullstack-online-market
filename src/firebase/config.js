@@ -4,7 +4,7 @@ import { getFirestore } from "firebase/firestore";
 import { getStorage } from "firebase/storage";
 
 export const firebaseConfig = {
-  apiKey: import.meta.env.VITE_FB_API_KEY,
+  apiKey: "AIzaSyCrTXeMBfQWJHGueWszfSxFuCn8lmShs9Q",
   authDomain: "eshop-32819.firebaseapp.com",
   projectId: "eshop-32819",
   storageBucket: "eshop-32819.appspot.com",

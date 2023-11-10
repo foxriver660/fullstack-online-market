@@ -27,7 +27,7 @@ import Layout from "./pages/Layout/Layout";
 function App() {
   return (
     <>
-      <BrowserRouter>
+      <BrowserRouter basename="/fullstack-online-market/">
         <ToastContainer />
         <Header />
         <Routes>

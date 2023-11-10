@@ -1,11 +1,10 @@
 {
-  "name": "fullstack-online-marke",
-  "private": true,
+  "name": "fullstack-online-market",
   "version": "0.1.0",
-  "homepage": "./",
+  "homepage": "https://foxriver660.github.io/fullstack-online-market/",
   "scripts": {
-    "dev: backend": "nodemon server.js",
-    "dev: frontend": "vite",
+    "backend": "nodemon server.js",
+    "frontend": "vite",
     "dev": "node server",
     "deploy": "vite build && gh-pages -d dist",
     "preview": "vite preview"

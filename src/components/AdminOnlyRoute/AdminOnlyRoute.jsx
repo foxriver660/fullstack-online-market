@@ -5,7 +5,7 @@ import "./AdminOnlyRoute.scss";
 import { Link } from "react-router-dom";
 const AdminOnlyRoute = ({ children }) => {
   const userEmail = useSelector(selectEmail);
-  if (userEmail === import.meta.env.VITE_ADMIN_USER) {
+  if (userEmail === import.meta.env.VITE_ADMIN_USER || userEmail === import.meta.env.VITE_ADMIN_USER2) {
     return children;
   } else {
     return (
@@ -21,7 +21,7 @@ const AdminOnlyRoute = ({ children }) => {
 
 export const AdminOnlyLink = ({ children }) => {
   const userEmail = useSelector(selectEmail);
-  if (userEmail === import.meta.env.VITE_ADMIN_USER) {
+  if (userEmail === import.meta.env.VITE_ADMIN_USER || userEmail === import.meta.env.VITE_ADMIN_USER2) {
     return children;
   } else {
     return null;
